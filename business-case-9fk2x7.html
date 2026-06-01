@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>외국인 신사업 — 목적 및 타당성 · PlugNX × Moneeback</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="preconnect" href="https://rsms.me" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#ffffff; --ink:#0a0b0d; --muted:#5b616e; --border:#e5e7eb;
+    --accent:#0052ff; --accent-hover:#0040cc;
+    --soft:#fafbfc; --warn:#f59e0b; --danger:#ef4444; --ok:#10b981;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:Inter,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    letter-spacing:-0.01em; -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  section{padding:88px 0;border-bottom:1px solid var(--border)}
+  section.alt{background:var(--soft)}
+
+  /* Typography */
+  .display-xl{font-size:clamp(40px,6vw,64px);line-height:1.04;font-weight:400;letter-spacing:-0.025em;color:var(--ink)}
+  .display-lg{font-size:clamp(32px,4.5vw,44px);line-height:1.05;font-weight:400;letter-spacing:-0.02em;color:var(--ink)}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .lead{font-size:18px;line-height:1.6;color:var(--muted);max-width:780px}
+  h2.sec{font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  h3.title{font-size:clamp(28px,3.5vw,40px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;margin-bottom:18px}
+  h4.block{font-size:14px;font-weight:700;letter-spacing:0.04em;color:var(--ink);text-transform:uppercase;margin-bottom:18px}
+
+  /* Nav */
+  nav.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:-0.01em}
+  .brand .logo{width:28px;height:28px;border-radius:6px;background:var(--accent);display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px}
+  .navlinks{display:flex;gap:24px;font-size:14px}
+  .navlinks a{color:var(--ink);transition:color .15s}
+  .navlinks a:hover{color:var(--accent)}
+  @media(max-width:1180px){.navlinks{display:none}}
+  .pill-btn{height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 20px;border-radius:9999px;background:var(--accent);color:#fff;font-weight:600;font-size:14px;border:1px solid var(--accent);transition:opacity .15s}
+  .pill-btn:hover{opacity:0.92}
+  .pill-btn.ghost{background:#fff;color:var(--ink);border-color:var(--border)}
+  .pill-btn.ghost:hover{border-color:var(--ink)}
+  .pill-btn.lg{height:56px;font-size:17px;padding:0 32px}
+
+  /* Hero */
+  .hero{padding:92px 0 80px}
+  .hero h1{margin-bottom:24px;max-width:880px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p.lead{margin-bottom:36px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--border)}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:#fff;padding:24px 22px}
+  .kpi .n{font-size:34px;line-height:1;font-weight:400;letter-spacing:-0.02em}
+  .kpi .l{font-size:12.5px;color:var(--muted);margin-top:8px}
+  .kpi .s{font-size:11.5px;color:var(--muted);margin-top:4px;opacity:0.85}
+
+  /* Grid utilities */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+  /* Cards */
+  .card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:24px;transition:border-color .15s}
+  .card:hover{border-color:var(--ink)}
+  .card h4{font-size:17px;font-weight:600;margin-bottom:8px;letter-spacing:-0.01em}
+  .card p{font-size:14px;color:var(--muted);line-height:1.6}
+  .card .num{font-size:34px;line-height:1;font-weight:400;letter-spacing:-0.02em;color:var(--ink);margin-bottom:12px}
+  .card .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);background:#eef4ff;padding:4px 10px;border-radius:999px;margin-bottom:14px}
+
+  /* Tables */
+  table.dt{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  table.dt th,table.dt td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  table.dt th{background:var(--soft);color:var(--muted);font-weight:600;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase}
+  table.dt tr:last-child td{border-bottom:none}
+  table.dt b{color:var(--ink)}
+
+  /* Pill list */
+  .pill{display:inline-flex;align-items:center;gap:6px;background:#eef4ff;color:var(--accent);font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;margin:4px 4px 0 0}
+
+  /* Chart cards */
+  .chartbox{background:#fff;border:1px solid var(--border);border-radius:8px;padding:24px}
+  .chartbox h4{font-size:14px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:6px}
+  .chartbox .note{font-size:12px;color:var(--muted);margin-bottom:14px}
+  .canvas-h{position:relative;height:300px}
+
+  /* Funnel */
+  .funnel{display:flex;flex-direction:column;gap:8px}
+  .fl{border-radius:8px;padding:16px 22px;color:#fff;font-weight:600}
+  .fl .lab{font-size:12px;font-weight:600;opacity:0.85}
+  .fl .val{font-size:22px;font-weight:400;letter-spacing:-0.01em;margin-top:4px}
+  .fl small{font-size:12px;font-weight:500;opacity:0.85}
+
+  /* Flywheel */
+  .flywheel{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff}
+  .flywheel .node{padding:24px 28px}
+  .flywheel .node .role{font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .flywheel .node h5{font-size:18px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px}
+  .flywheel .node p{font-size:13.5px;color:var(--muted);line-height:1.6}
+  .flywheel .b2b{background:linear-gradient(180deg,#eef4ff,#fafbff)}
+  .flywheel .b2c{background:#0a0b0d;color:#fff}
+  .flywheel .b2c h5{color:#fff}
+  .flywheel .b2c p,.flywheel .b2c .role{color:rgba(255,255,255,0.7)}
+  .flywheel .mid{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 18px;background:var(--soft);font-size:11.5px;font-weight:600;color:var(--muted);text-align:center;min-width:140px}
+  .flywheel .mid .up{color:var(--accent)}
+  @media(max-width:860px){.flywheel{grid-template-columns:1fr}.flywheel .mid{flex-direction:row;justify-content:center;padding:14px}}
+
+  /* Lifecycle gap journey */
+  .journey{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  @media(max-width:860px){.journey{grid-template-columns:1fr}}
+  .stage{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+  .stage .head{padding:12px 14px;font-size:13px;font-weight:600;text-align:center;border-bottom:1px solid var(--border);background:var(--soft)}
+  .stage .body{padding:14px;flex:1;display:flex;flex-direction:column;gap:8px}
+  .stage .who{font-size:11.5px;color:var(--muted);line-height:1.5}
+  .stage .status{margin-top:auto;font-size:11.5px;font-weight:700;padding:6px 10px;border-radius:6px;text-align:center}
+  .stage.covered .status{background:#eef1f4;color:var(--muted)}
+  .stage.gap{border-color:var(--accent);border-width:2px;box-shadow:0 8px 24px -12px rgba(0,82,255,0.4)}
+  .stage.gap .head{background:#eef4ff;color:var(--accent);font-weight:700}
+  .stage.gap .status{background:var(--accent);color:#fff}
+  .stage .ours{font-size:12px;font-weight:600;color:var(--accent);margin-top:4px}
+  .journey-arrow{text-align:center;color:var(--muted);font-size:18px;margin:0 -4px;align-self:center}
+
+  /* Two-pillar (distinct, non-overlapping) */
+  .pillars{position:relative}
+  .pillars .top{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.pillars .top{grid-template-columns:1fr}}
+  .pillar{border:1px solid var(--border);border-radius:8px;padding:24px;background:#fff}
+  .pillar.b2b{border-top:4px solid var(--accent)}
+  .pillar.b2c{border-top:4px solid var(--ink)}
+  .pillar .ptag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+  .pillar.b2b .ptag{background:#eef4ff;color:var(--accent)}
+  .pillar.b2c .ptag{background:#f0f1f3;color:var(--ink)}
+  .pillar h5{font-size:19px;font-weight:600;letter-spacing:-0.01em;margin-bottom:4px}
+  .pillar .sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .pillar ul{list-style:none;font-size:13.5px;color:var(--ink);line-height:1.5}
+  .pillar li{position:relative;padding:7px 0 7px 22px;border-top:1px solid var(--border)}
+  .pillar li:first-child{border-top:none}
+  .pillar li:before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:2px}
+  .pillar.b2b li:before{background:var(--accent)}
+  .pillar.b2c li:before{background:var(--ink)}
+  .pillar li small{color:var(--muted);font-weight:400}
+  .vs-chip{position:absolute;left:50%;top:60px;transform:translateX(-50%);z-index:2;background:#fff;border:1px solid var(--border);border-radius:999px;width:44px;height:44px;display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--muted)}
+  @media(max-width:720px){.vs-chip{display:none}}
+  .foundation{margin-top:14px;border:1px dashed var(--accent);border-radius:8px;background:linear-gradient(180deg,#f5f8ff,#fff);padding:20px 24px;text-align:center}
+  .foundation .fl-tag{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .foundation h5{font-size:16px;font-weight:600;margin-bottom:6px}
+  .foundation p{font-size:13px;color:var(--muted);max-width:640px;margin:0 auto}
+  .nonoverlap{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:18px}
+  .nonoverlap b{color:var(--ink);font-weight:600}
+
+  /* Journey × competitor table */
+  table.journeytbl{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  table.journeytbl th,table.journeytbl td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  table.journeytbl th{background:var(--soft);color:var(--muted);font-weight:600;font-size:11px;letter-spacing:0.05em;text-transform:uppercase}
+  table.journeytbl tr:last-child td{border-bottom:none}
+  table.journeytbl .stg{font-weight:600;color:var(--ink);white-space:nowrap}
+  table.journeytbl .stg .no{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:5px;background:#eef1f4;color:var(--muted);font-size:11px;font-weight:700;margin-right:7px;vertical-align:middle}
+  table.journeytbl tr.focus{background:#f5f8ff}
+  table.journeytbl tr.focus .stg .no{background:var(--accent);color:#fff}
+  table.journeytbl td.tp{font-weight:600;color:var(--ink);white-space:nowrap}
+  table.journeytbl td.tp small{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:2px}
+  table.journeytbl tr.phase td{background:#0d1220;color:#fff;font-weight:700;font-size:12px;letter-spacing:0.04em;padding:9px 13px}
+  table.journeytbl tr.phase td .pno{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:5px;background:rgba(255,255,255,0.16);color:#fff;font-size:11px;font-weight:700;margin-right:8px;vertical-align:middle}
+  table.journeytbl tr.phase.hot td{background:var(--accent)}
+  table.journeytbl tr.phase td .ptag2{float:right;font-weight:700;font-size:10.5px;background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:999px}
+  table.journeytbl tr.sub td{font-size:12.5px;padding:9px 13px}
+  table.journeytbl tr.sub.focus td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+  .cov{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .cov.full{background:#eef1f4;color:var(--muted)}
+  .cov.part{background:#fff7e6;color:#b45309}
+  .cov.empty{background:#eef4ff;color:var(--accent)}
+  .ours-tag{display:inline-block;font-size:11.5px;font-weight:700;color:var(--accent)}
+  .ours-tag.mb{color:var(--ink)}
+  .focus-callout{display:flex;gap:16px;align-items:flex-start;background:var(--ink);color:#fff;border-radius:8px;padding:22px 24px;margin-top:18px}
+  .focus-callout .big{font-size:32px;line-height:1;font-weight:400;letter-spacing:-0.02em;white-space:nowrap}
+  .focus-callout p{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6}
+  .focus-callout b{color:#fff;font-weight:600}
+
+  /* Needs / pain cards */
+  .needs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:860px){.needs{grid-template-columns:1fr}}
+  .needtbl{width:100%;border-collapse:collapse;font-size:13px}
+  .needtbl th{text-align:left;font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);padding:0 0 8px}
+  .needtbl td{vertical-align:top;padding:9px 0;border-top:1px solid var(--border);line-height:1.55}
+  .needtbl td.pain{color:var(--muted);width:50%;padding-right:14px}
+  .needtbl td.sol{color:var(--ink);width:50%;padding-left:14px;font-weight:500}
+  .needtbl td.sol:before{content:"→ ";color:var(--accent);font-weight:700}
+
+  /* Data flow chain */
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .flow .box{flex:1;min-width:150px;border:1px solid var(--border);border-radius:8px;padding:16px 18px;background:#fff;text-align:center}
+  .flow .box.src{background:var(--soft)}
+  .flow .box.score{border:2px solid var(--accent);background:#f5f8ff}
+  .flow .box.out{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .flow .box .bt{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .flow .box.score .bt{color:var(--accent)} .flow .box.out .bt{color:rgba(255,255,255,0.6)}
+  .flow .box h5{font-size:15px;font-weight:600;margin-bottom:4px;letter-spacing:-0.01em}
+  .flow .box p{font-size:12px;color:var(--muted);line-height:1.5}
+  .flow .box.out p{color:rgba(255,255,255,0.8)}
+  .flow .arr{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:700;padding:0 6px}
+  @media(max-width:860px){.flow{flex-direction:column}.flow .arr{transform:rotate(90deg);justify-content:center;padding:6px 0}}
+  /* refinance compare */
+  .refi{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff}
+  .refi .side{padding:20px 22px}
+  .refi .before{background:#fff7f5}
+  .refi .after{background:#f5f8ff}
+  .refi .side .lab{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px}
+  .refi .before .lab{color:var(--danger)} .refi .after .lab{color:var(--accent)}
+  .refi .side .rate{font-size:30px;font-weight:400;letter-spacing:-0.02em;line-height:1}
+  .refi .side .rate small{font-size:13px;color:var(--muted)}
+  .refi .side p{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+  .refi .mid{font-size:24px;color:var(--accent);font-weight:700}
+  @media(max-width:720px){.refi{grid-template-columns:1fr}.refi .mid{transform:rotate(90deg)}}
+
+  /* Verdict box */
+  .verdict{background:var(--ink);color:#fff;border-radius:8px;padding:36px 32px}
+  .verdict .label{font-size:11.5px;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:10px}
+  .verdict h2{font-size:clamp(28px,3.5vw,40px);font-weight:400;letter-spacing:-0.02em;line-height:1.15;margin-bottom:16px}
+  .verdict p{color:rgba(255,255,255,0.75);font-size:15px;line-height:1.6;max-width:680px;margin-bottom:20px}
+  .verdict .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:rgba(255,255,255,0.6)}
+  .verdict .meta b{color:#fff;font-weight:600}
+
+  /* SWOT-ish */
+  .swot{border:1px solid var(--border);border-radius:8px;padding:24px;background:#fff}
+  .swot.warn{border-top:3px solid var(--danger)}
+  .swot.ok{border-top:3px solid var(--ok)}
+  .swot h4{font-size:15px;font-weight:600;margin-bottom:14px}
+  .swot ul{list-style:none;font-size:13.5px;color:var(--ink);line-height:1.65}
+  .swot li{position:relative;padding-left:18px;margin-bottom:6px}
+  .swot li:before{content:"▸";position:absolute;left:0;color:var(--accent);font-weight:700}
+
+  /* Pricing-style grid for MVP features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  @media(max-width:860px){.features{grid-template-columns:1fr}}
+  .features .cell{background:#fff;padding:22px}
+  .features .cell h5{font-size:15px;font-weight:600;margin-bottom:6px}
+  .features .cell p{font-size:13px;color:var(--muted);line-height:1.6}
+  .features .cell .check{color:var(--ok);font-weight:700;margin-right:6px}
+
+  /* Footer */
+  footer{padding:48px 0;background:#fff}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--muted)}
+  footer b{color:var(--ink);font-weight:600}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Floating PDF action */
+  .pdf-fab{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:stretch;
+    background:var(--ink);color:#fff;border-radius:999px;box-shadow:0 12px 32px -8px rgba(10,11,13,0.45);overflow:hidden}
+  .pdf-fab a{display:inline-flex;align-items:center;gap:7px;padding:12px 18px;font-size:13.5px;font-weight:600;color:#fff;transition:background .15s;white-space:nowrap}
+  .pdf-fab a:hover{background:rgba(255,255,255,0.12)}
+  .pdf-fab a.dl{padding:12px 16px;border-left:1px solid rgba(255,255,255,0.18)}
+  .pdf-fab .ic{font-size:15px}
+  @media(max-width:560px){.pdf-fab a span.lbl{display:none}.pdf-fab a{padding:13px 15px}}
+  /* nav pdf button */
+  .pill-btn.pdf{background:#fff;color:var(--ink);border-color:var(--border)}
+  .pill-btn.pdf:hover{border-color:var(--ink);opacity:1}
+
+  /* ===== PRINT / PDF ===== */
+  @media print{
+    nav.top{position:static}
+    .pill-btn{display:none}
+    .pdf-fab{display:none !important}
+    body{font-size:12px}
+    section{padding:26px 0;break-inside:auto}
+    .hero{padding:24px 0 20px}
+    .display-xl{font-size:34px}
+    .display-lg{font-size:26px}
+    h3.title{break-after:avoid}
+    h4.block{break-after:avoid}
+    .reveal{opacity:1 !important;transform:none !important}
+    .card,.chartbox,.swot,.pillar,.flow .box,.refi,.verdict,.focus-callout,
+      .kpi,.stage,.flywheel,table.dt,table.price,table.map,.fl,.needs .pillar{break-inside:avoid}
+    table.journeytbl{break-inside:auto}
+    table.journeytbl tr{break-inside:avoid}
+    table.journeytbl thead{display:table-header-group}
+    table.journeytbl tr.phase{break-after:avoid}
+    .grid,.g2,.g3,.g4,.journey,.flow,.needs{break-inside:auto}
+    .canvas-h{height:280px}
+  }
+  @page{size:A4 landscape;margin:9mm}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="top">
+  <div class="wrap">
+    <div class="brand"><div class="logo">P</div>외국인 신사업 타당성</div>
+    <div class="navlinks">
+      <a href="#summary">요약</a>
+      <a href="#purpose">목적</a>
+      <a href="#policy">정책 인사이트</a>
+      <a href="#needs">Needs·Pain</a>
+      <a href="#model">시장·모델</a>
+      <a href="#market">시장</a>
+      <a href="#product">제품</a>
+      <a href="#competition">경쟁</a>
+      <a href="#financial">재무</a>
+      <a href="#finance-expansion">금융 확장</a>
+      <a href="#ops">실행</a>
+      <a href="#conclusion">결론</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <a class="pill-btn pdf" href="business-case-9fk2x7.pdf" target="_blank" rel="noopener">📄 PDF</a>
+      <a class="pill-btn pdf" href="https://plugnx-visaops.netlify.app" target="_blank" rel="noopener">🏢 Crew</a>
+      <a class="pill-btn" href="https://plugnx-visaops.netlify.app/workers" target="_blank" rel="noopener">💰 Moneeback</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap reveal in">
+    <div class="eyebrow">외국인 신사업 사업기획 · 2026.05</div>
+    <h1 class="display-xl">
+      <em>외국인 278만 시대,</em><br/>지금이 사업의 골든타임입니다.
+    </h1>
+    <p class="lead">
+      PlugNX × Moneeback은 이미 라이브로 검증된 통합 플랫폼을 기반으로,
+      외국인 고용·체류·금융 시장에 진입하는 사업의 <b style="color:var(--ink)">목적과 타당성</b>을 정리합니다.
+      MVP는 이미 가동 중이며, 시장·제품·경쟁·재무·운영 전 축에서 진입이 합리적인지를 데이터로 입증합니다.
+    </p>
+    <div class="hero-cta">
+      <a class="pill-btn lg" href="https://plugnx-visaops.netlify.app" target="_blank">🏢 Crew 라이브 (기업)</a>
+      <a class="pill-btn lg ghost" href="https://plugnx-visaops.netlify.app/workers" target="_blank">💰 Moneeback 라이브 (근로자)</a>
+      <a class="pill-btn lg ghost" href="#purpose">사업기획 읽기 ↓</a>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="n">278<span style="font-size:16px;color:var(--muted);margin-left:2px">만</span></div><div class="l">체류외국인 (’25.12)</div><div class="s">’26년 300만 돌파 예상</div></div>
+      <div class="kpi"><div class="n">112.5<span style="font-size:16px;color:var(--muted);margin-left:2px">만</span></div><div class="l">’30 인력부족 (최소)</div><div class="s">1,125,100명 · 법무부 추계</div></div>
+      <div class="kpi"><div class="n">21<span style="font-size:16px;color:var(--muted);margin-left:2px">억</span></div><div class="l">12개월 목표 ARR</div><div class="s">24개월 60억 · 300사</div></div>
+      <div class="kpi"><div class="n">5<span style="font-size:16px;color:var(--muted);margin-left:2px">선</span></div><div class="l">경쟁 해자</div><div class="s">양면 데이터·인증 기술 등</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 00 한눈에 보기 ===== -->
+<section id="summary" class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">한눈에 보기 · Executive Summary</h2>
+      <h3 class="title">3분 보고 — 핵심 결론 6가지</h3>
+      <p class="lead">의사결정자를 위한 요약. 아래 6개 문장이 본 보고서의 결론이며, 각 섹션이 이를 데이터로 뒷받침합니다.</p>
+    </div>
+    <div class="grid g2 reveal" style="margin-top:32px">
+      <div class="card" style="border-left:3px solid var(--accent)">
+        <div class="tag">목적</div>
+        <h4 style="font-size:16px">외국인 고용·생활의 전 라이프사이클 인프라가 된다</h4>
+        <p>‘채용 이후 관리 공백’과 ‘퇴직 이후 환급 공백’을 하나의 데이터로 잡는 양면 플랫폼. 고용주(B2B)·근로자(B2C) 동시 공략.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--accent)">
+        <div class="tag">왜 지금</div>
+        <h4 style="font-size:16px">시장·정책·기술이 동시에 정렬된 골든타임</h4>
+        <p>체류외국인 278만(’26년 300만 돌파) · 생산인구 -313만 · 「2030 이민정책 미래전략」이 외국인을 국가성장 자산으로 재정의.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--accent)">
+        <div class="tag">정책 인사이트</div>
+        <h4 style="font-size:16px">5대 정책 과제가 그대로 민간 사업 기회</h4>
+        <p>“공무원 편한 행정 → 기업인 편한 행정”, K-Trust 인증제, 디지털 비자, 임금 자문위 — 모두 SaaS·금융 수요로 직결.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--accent)">
+        <div class="tag">차별성</div>
+        <h4 style="font-size:16px">중개가 아닌 인프라 — 모방 난이도 높음</h4>
+        <p>양면 네트워크 + 고용·금융 결합 데이터(외국인 신용스코어) + 정책 정합성으로 단방향 경쟁자가 따라올 수 없는 해자.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--accent)">
+        <div class="tag">사업성 타당성</div>
+        <h4 style="font-size:16px">고객 ROI가 명확해 단가 방어가 되는 구조</h4>
+        <p>외국인 1명 사고비용(과태료·인력공백) &gt; 연 구독료 → 도입 명분이 자명. <b>구독(반복매출) + 환급 성공보수</b> 이중 수익, CAC 0원 양면 플라이휠.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--accent)">
+        <div class="tag">GTM</div>
+        <h4 style="font-size:16px">B2B로 진입 → B2C 자동 확보</h4>
+        <p>산단공단·요양협회 세미나 → 무료 진단 → 유료 전환의 검증된 깔때기. 기업이 등록하면 근로자가 따라오는 <b>B2B2C 단일 채널</b>로 동시 공략.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01 목적 ===== -->
+<section id="purpose">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">01 · Purpose</h2>
+      <h3 class="title">왜 지금, 왜 이 사업인가</h3>
+      <p class="lead">
+        한국은 2030년까지 생산연령인구가 313만 명 감소하는 ‘축소사회’에 진입합니다. 정부는 이미
+        「2030 이민정책 미래전략」으로 외국인을 ‘노동 보충’이 아닌 <b style="color:var(--ink)">국가성장 자산</b>으로 재정의했습니다.
+        시장·정책·기술이 동시에 정렬되는 이 시점이 사업 진입의 골든타임입니다.
+      </p>
+    </div>
+    <div class="grid g3" style="margin-top:36px">
+      <div class="card reveal">
+        <div class="tag">WHY</div>
+        <div class="num">-313<span style="font-size:18px;color:var(--muted);margin-left:2px">만</span></div>
+        <h4>축소사회 진입</h4>
+        <p>생산연령인구 ’20년 3,730만 → ’30년 3,417만. 노동력·소비·복지가 동시에 흔들리는 구조적 변곡점.</p>
+      </div>
+      <div class="card reveal">
+        <div class="tag">WHO</div>
+        <div class="num">278<span style="font-size:18px;color:var(--muted);margin-left:2px">만</span></div>
+        <h4>이미 도래한 시장</h4>
+        <p>10년간 1.5배 성장한 체류외국인. 단순 노동시장이 아닌 <b>소비·생활·금융 시장</b>으로 전환 중.</p>
+      </div>
+      <div class="card reveal">
+        <div class="tag">HOW</div>
+        <div class="num">5<span style="font-size:18px;color:var(--muted);margin-left:2px">대 과제</span></div>
+        <h4>정책 골든타임</h4>
+        <p>K-Trust 인증제·디지털 비자 행정·임금 자문위원회 등 정책이 민간 SaaS와 직접 연결되는 구조.</p>
+      </div>
+    </div>
+
+    <div class="grid g2 reveal" style="margin-top:24px">
+      <div class="card" style="background:var(--soft);border:none">
+        <div class="tag" style="background:#fff2f0;color:var(--danger)">고용주의 페인</div>
+        <ul style="list-style:none;font-size:14px;color:var(--ink);line-height:1.85;margin-top:6px">
+          <li>· 체류만료 1건 놓치면 사업주 과태료 최대 <b>2,000만원</b></li>
+          <li>· 비자 갱신 거부 시 인력 공백 평균 <b>1,500만원</b>/3개월</li>
+          <li>· 행정사 반복 수수료 <b>건당 80~150만원</b></li>
+          <li>· K-Trust 미준비 시 외국인 쿼터 <b>-20~30%</b></li>
+        </ul>
+      </div>
+      <div class="card" style="background:var(--soft);border:none">
+        <div class="tag" style="background:#f0fdf4;color:var(--ok)">근로자의 페인</div>
+        <ul style="list-style:none;font-size:14px;color:var(--ink);line-height:1.85;margin-top:6px">
+          <li>· 미수령 환급 1인 평균 <b>1,050만원</b> (연금·고용·퇴직금)</li>
+          <li>· 외국인 임금체불 연 <b>1,200억원</b> (노동부)</li>
+          <li>· 신용정보 부재로 제도권 대출 거절</li>
+          <li>· 모국어 안내 부재 → 사기·고금리 사금융 노출</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict reveal" style="margin-top:32px">
+      <div class="label">Vision</div>
+      <h2>외국인 고용·생활의 전 라이프사이클 인프라.</h2>
+      <p>‘채용 이후 관리 공백’과 ‘퇴직 이후 환급 공백’ — 두 공백을 하나의 데이터 위에서 잡는다.
+        고용주·근로자 양측에 가치 제공 + 외국인 신용스코어라는 데이터 해자를 동시에 구축한다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 02 정책 인사이트 ===== -->
+<section id="policy">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">02 · Policy Insight</h2>
+      <h3 class="title">「2030 이민정책 미래전략」이 말하는 것</h3>
+      <p class="lead">
+        법무부가 2026년 3월 발표한 국가 이민정책의 방향이 곧 사업의 나침반입니다.
+        정책의 <b style="color:var(--ink)">패러다임 전환</b>과 <b style="color:var(--ink)">5대 핵심 과제</b>는
+        그대로 민간 사업 기회로 번역됩니다 — 정부가 시장을 열어주는 구조입니다.
+      </p>
+    </div>
+
+    <!-- 패러다임 전환 -->
+    <div class="reveal" style="margin-top:36px">
+      <h4 class="block">인사이트 ① 패러다임 전환 — ‘성장시대 → 축소사회’</h4>
+      <div style="overflow-x:auto">
+        <table class="dt">
+          <thead><tr>
+            <th style="width:22%">관점</th>
+            <th style="width:30%">과거 · 성장시대</th>
+            <th style="width:30%">미래 · 축소사회</th>
+            <th>사업적 함의</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><b>외국인을 보는 관점</b></td><td>3D 단기 노동력 (임시 체류자)</td><td>소비·부가가치 창출 국가성장 자산 (지역주민)</td><td>외국인 = <b>고객·시장</b></td></tr>
+            <tr><td><b>유입 방식</b></td><td>해외 직(直)도입</td><td>국내서 검증된 외국인 우선 활용</td><td>유학생·정주층 <b>금융 타깃</b></td></tr>
+            <tr><td><b>사회통합</b></td><td>국가 지원 + 외국인 선택</td><td>국가 지원 + 외국인 책임성 강화</td><td>교육·통합 <b>EduTech 수요</b></td></tr>
+            <tr><td><b>제도 운영방식</b></td><td>공무원이 편한 방식</td><td><b>기업인이 편한 방식</b></td><td><b>B2B SaaS 진입 공간</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:16px">
+        <span class="pill">비전 · 국민과 이민자가 함께 성장하는 포용 기반의 이민정책</span>
+        <span class="pill">목표 ① 성장(경제)</span>
+        <span class="pill">목표 ② 행복(안전)</span>
+        <span class="pill">목표 ③ 회복(통합)</span>
+      </div>
+    </div>
+
+    <!-- 5대 과제 → 사업 매핑 -->
+    <div class="reveal" style="margin-top:40px">
+      <h4 class="block">인사이트 ② 5대 핵심 과제 → 사업 기회 매핑</h4>
+      <div style="overflow-x:auto">
+        <table class="dt">
+          <thead><tr>
+            <th style="width:6%">과제</th>
+            <th style="width:30%">정책 내용</th>
+            <th style="width:34%">핵심 수치</th>
+            <th>사업 기회 (제품 연결)</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>경제성장·지역발전 이민정책 — 톱티어·K-STAR·K-CORE 비자, 돌봄인력, 지역이민</td>
+              <td>톱티어 20→350명 · K-STAR 100→500명/년 · 지역특화형 5,072명</td>
+              <td>채용 파이프라인 · 비자전환 관리 · <b>돌봄 버티컬</b></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>기업인이 쉽게 쓰는 이민행정 전환 — 비자체계 단순화, 디지털 민원 전면 전환, AI 사전스크리닝</td>
+              <td>취업비자 10종 39개 → 고·중·저 3단계 · 대행기관 3,725곳</td>
+              <td><b>Crew RegTech 코어</b> · 서류 자동검토 · 대행 마켓</td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>적합 유치그룹 연구·유입규모·임금요건 설정 — 빅데이터 분석, 임금 자문위, 매년 고시</td>
+              <td>’26 임금요건 E-7-1 3,112만 / E-7-4 2,600만 · 사전공표 쿼터</td>
+              <td><b>임금요건 자동 체크</b> · 쿼터 트래킹</td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>AI·빅데이터 출입국·거주 관리 — AI 생체인증, <b>K-Trust 성실기업 인증제</b>, 예방 중심 관리</td>
+              <td>A등급 고용쿼터 +20~30% · Fast Track / C등급 신규고용 제한</td>
+              <td><b>K-Trust Readiness SaaS</b> · 컴플라이언스 컨설팅</td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>반(反)이민정서·갈등 중재·권익보호 — 사회통합교육 의무화, 이주배경 아동, 임금체불 구제</td>
+              <td>사회통합 참여 9만 · 이주배경학생 20.2만 · 임금체불 연 1,200억</td>
+              <td><b>Moneeback 환급·급여 적정성</b> · 교육 트래킹</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 핵심 시사점 3 -->
+    <div class="grid g3 reveal" style="margin-top:24px">
+      <div class="card">
+        <div class="tag">시사점 A</div>
+        <h4>정부가 직접 시장을 연다</h4>
+        <p>“공무원 편한 행정 → 기업인 편한 행정” 전환은 곧 민간 SaaS가 들어설 공간. 디지털 비자·AI 심사가 RegTech 수요를 창출.</p>
+      </div>
+      <div class="card">
+        <div class="tag">시사점 B</div>
+        <h4>K-Trust = 강제력 있는 수요</h4>
+        <p>A등급 쿼터 +20~30%·Fast Track은 ‘있으면 좋은’이 아니라 ‘없으면 손해’. 고용주가 컴플라이언스 SaaS를 살 강한 이유.</p>
+      </div>
+      <div class="card">
+        <div class="tag">시사점 C</div>
+        <h4>관리 대상 → 권익 구성원</h4>
+        <p>외국인을 권익 존중 구성원으로 재정의 = 환급·급여·금융 등 B2C 서비스 시장의 정책적 정당성 확보.</p>
+      </div>
+    </div>
+
+    <p class="lead" style="font-size:13px;color:var(--muted);margin-top:20px">
+      ※ 출처: 법무부 「2030 이민정책 미래전략」(2026.3) 5대 핵심 추진과제 및 환경분석. 수치는 정책 원문·연구용역 기준.
+    </p>
+  </div>
+</section>
+
+<!-- ===== 03 Needs & Pain Point ===== -->
+<section id="needs">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">03 · Needs &amp; Pain Point</h2>
+      <h3 class="title">고객은 지금 무엇이 아픈가</h3>
+      <p class="lead">
+        정책이 시장을 여는 동안, 현장의 고용주와 노동자는 실제로 돈과 시간을 잃고 있습니다.
+        우리가 푸는 <b style="color:var(--ink)">핵심 페인과 니즈</b>를 양측으로 나눠 정리합니다 — 이 고통의 크기가 곧 시장의 크기입니다.
+      </p>
+    </div>
+    <div class="needs" style="margin-top:36px">
+      <div class="pillar b2b" style="border-top:4px solid var(--accent)">
+        <span class="ptag" style="background:#eef4ff;color:var(--accent)">고용주 (B2B) · 재직관리</span>
+        <h5 style="font-size:17px;margin-bottom:14px">PlugNX Crew가 해소</h5>
+        <table class="needtbl">
+          <thead><tr><th>Pain Point (현재)</th><th>Need → 우리의 해소</th></tr></thead>
+          <tbody>
+            <tr><td class="pain">체류만료를 엑셀·기억에 의존 → 불법체류 과태료 최대 2,000만원</td><td class="sol">D-120·90·60·30 자동 알림</td></tr>
+            <tr><td class="pain">E-7 비자별 임금요건이 매년 변경 → 추적 불가</td><td class="sol">임금요건 자동 비교·경고</td></tr>
+            <tr><td class="pain">학위·계약·초청 서류 수십 종이 분산</td><td class="sol">서류함 + 누락·만료 추적</td></tr>
+            <tr><td class="pain">담당자 퇴사 시 관리 히스토리 증발</td><td class="sol">기업 리스크 점수로 상태 가시화</td></tr>
+            <tr><td class="pain">K-Trust 인증 준비가 막막 (쿼터 -20~30% 위험)</td><td class="sol">A/B/C 등급 진단 + 격상 액션</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pillar b2c" style="border-top:4px solid var(--ink)">
+        <span class="ptag" style="background:#f0f1f3;color:var(--ink)">근로자 (B2C) · 생활·환급</span>
+        <h5 style="font-size:17px;margin-bottom:14px">Moneeback이 해소</h5>
+        <table class="needtbl">
+          <thead><tr><th>Pain Point (현재)</th><th>Need → 우리의 해소</th></tr></thead>
+          <tbody>
+            <tr><td class="pain">못 받은 연금·보험·퇴직금 1인 평균 1,050만원 방치</td><td class="sol">환급 30초 체크·대행</td></tr>
+            <tr><td class="pain">내 급여가 적정한지 모름 → 체불 연 1,200억</td><td class="sol">AI 급여 적정성 분석</td></tr>
+            <tr><td class="pain">신용정보 부재로 제도권 대출·카드 거절</td><td class="sol">외국인 신용스코어·대출 중개</td></tr>
+            <tr><td class="pain">송금 수수료 비싸고 사기·사금융 노출</td><td class="sol">송금 비교 + 전세 안전체크</td></tr>
+            <tr><td class="pain">한국어 장벽으로 정보 접근 불가</td><td class="sol">다국어(한·영·베…) 안내</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="nonoverlap"><span>📍 이 페인이 가장 큰 <b>재직관리 · 생활·환급</b> 구간이 다음 섹션의 ‘빈 공간’ — 우리가 정조준하는 시장입니다.</span></div>
+  </div>
+</section>
+
+<!-- ===== 04 시장 지형 & 모델 ===== -->
+<section id="model" class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">04 · Market Map &amp; Model</h2>
+      <h3 class="title">시장의 빈 공간을 잡고, 둘이 나눠 채운다</h3>
+      <p class="lead">기존 플레이어는 ‘채용’까지만 본다. 채용 이후의 <b style="color:var(--ink)">관리 공백</b>과 퇴직 이후의 <b style="color:var(--ink)">환급 공백</b> — 아무도 채우지 않는 이 두 칸을 PlugNX와 Moneeback이 <b style="color:var(--ink)">서로 겹치지 않고</b> 나눠 맡습니다.</p>
+    </div>
+
+    <!-- (1) 고객여정 × 경쟁사 지형 (MECE · 8 Phase / 30 터치포인트) -->
+    <div class="reveal" style="margin-top:36px">
+      <h4 class="block">① 고객여정 30 터치포인트 × 경쟁 지형 — micro-needs까지 분해</h4>
+      <p style="font-size:13.5px;color:var(--muted);margin:-8px 0 16px;line-height:1.6">
+        8개 Phase를 <b style="color:var(--ink)">30개 세부 터치포인트</b>로 MECE 분해해, 각 순간의 <b style="color:var(--ink)">주체·핵심 Need/Pain</b>과 기존 서비스·커버리지를 매핑.
+        <span style="color:var(--accent);font-weight:600">파란 행(★)</span>이 경쟁이 비고 페인이 큰 우리 진입 지점입니다.
+      </p>
+      <div style="overflow-x:auto">
+        <table class="journeytbl">
+          <thead><tr>
+            <th style="width:18%">세부 터치포인트</th>
+            <th style="width:30%">핵심 Need · Pain</th>
+            <th style="width:28%">기존 서비스</th>
+            <th style="width:10%">커버</th>
+            <th>우리</th>
+          </tr></thead>
+          <tbody>
+            <!-- Phase 1 -->
+            <tr class="phase"><td colspan="5"><span class="pno">1</span>탐색·매칭 (Sourcing)<span class="ptag2">기존 시장 · 경쟁 포화</span></td></tr>
+            <tr class="sub"><td class="tp">1.1 인력수요·쿼터 확인<small>고용주</small></td><td class="pain">올해 몇 명까지 뽑나? 비자별 쿼터 잔여 파악 불가</td><td>고용허가제(EPS)·고용센터</td><td><span class="cov part">수동</span></td><td><span class="ours-tag">Crew 쿼터</span></td></tr>
+            <tr class="sub"><td class="tp">1.2 후보 탐색·매칭<small>고용주↔근로자</small></td><td class="pain">검증된 외국인 인재 찾기 어려움</td><td>잡코리아 글로벌·사람인·인력소개·페북 커뮤니티</td><td><span class="cov full">포화</span></td><td style="color:var(--muted)">—</td></tr>
+            <tr class="sub"><td class="tp">1.3 자격·평판 검증<small>고용주</small></td><td class="pain">학력·경력·범죄이력 진위 확인 곤란</td><td>개별 확인·대행</td><td><span class="cov part">파편</span></td><td><span class="ours-tag">Crew 검증</span></td></tr>
+
+            <!-- Phase 2 -->
+            <tr class="phase"><td colspan="5"><span class="pno">2</span>비자·입국 (Visa & Entry)<span class="ptag2">전문가 영역 · 파편화</span></td></tr>
+            <tr class="sub"><td class="tp">2.1 비자유형 판정·요건 진단<small>고용주</small></td><td class="pain">어떤 비자가 맞나? 임금요건 충족하나?</td><td>행정사·법무법인 상담</td><td><span class="cov part">건별</span></td><td><span class="ours-tag">Crew 진단</span></td></tr>
+            <tr class="sub"><td class="tp">2.2 서류 준비·제출<small>고용주+전문가</small></td><td class="pain">초청사유서·고용계약·학위 등 수십 종</td><td>행정사 대행</td><td><span class="cov full">대행</span></td><td><span class="ours-tag">Crew+마켓</span></td></tr>
+            <tr class="sub"><td class="tp">2.3 사증 발급·심사<small>정부</small></td><td class="pain">심사 지연·반려 사유 불투명</td><td>재외공관·하이코리아</td><td><span class="cov full">정부</span></td><td style="color:var(--muted)">—</td></tr>
+            <tr class="sub"><td class="tp">2.4 입국·외국인등록(ARC)<small>근로자</small></td><td class="pain">거소신고·ARC 발급 절차 모름</td><td>출입국·행정사</td><td><span class="cov part">안내</span></td><td><span class="ours-tag mb">앱 가이드</span></td></tr>
+
+            <!-- Phase 3 -->
+            <tr class="phase"><td colspan="5"><span class="pno">3</span>온보딩·정착 (Onboarding)<span class="ptag2">공공 일부 · 기업용 부재</span></td></tr>
+            <tr class="sub focus"><td class="tp">3.1 주거 확보<small>근로자</small></td><td class="pain">집 구하기·보증금 사기 위험·언어장벽</td><td>공인중개·커뮤니티</td><td><span class="cov empty">빈틈 ★</span></td><td><span class="ours-tag mb">전세 안전체크</span></td></tr>
+            <tr class="sub focus"><td class="tp">3.2 계좌·통신 개통<small>근로자</small></td><td class="pain">외국인 계좌개설 거절·서류 난해</td><td>은행 창구</td><td><span class="cov empty">빈틈 ★</span></td><td><span class="ours-tag mb">KYC 계좌연계</span></td></tr>
+            <tr class="sub"><td class="tp">3.3 직장적응·안전교육<small>고용주+근로자</small></td><td class="pain">OJT·산업안전 다국어 교육 부족</td><td>산업인력공단·사내</td><td><span class="cov part">공공</span></td><td><span class="ours-tag">Crew 온보딩</span></td></tr>
+            <tr class="sub"><td class="tp">3.4 한국어·생활 OT<small>근로자</small></td><td class="pain">사회통합·생활정보 접근성 낮음</td><td>외국인력지원센터·다문화센터</td><td><span class="cov part">공공</span></td><td><span class="ours-tag">교육 트래킹</span></td></tr>
+
+            <!-- Phase 4 -->
+            <tr class="phase hot"><td colspan="5"><span class="pno">4</span>재직·체류관리 (Compliance)<span class="ptag2">★ 빈 공간 · 핵심 진입</span></td></tr>
+            <tr class="sub focus"><td class="tp">4.1 체류기간 모니터링<small>고용주</small></td><td class="pain">만료 놓침 → 불법체류 과태료 2,000만</td><td>엑셀·캘린더·기억</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag">Crew 알림</span></td></tr>
+            <tr class="sub focus"><td class="tp">4.2 임금요건 준수<small>고용주</small></td><td class="pain">비자별 최저임금 매년 변경 추적 불가</td><td>수동 확인·노무사</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag">Crew 자동체크</span></td></tr>
+            <tr class="sub focus"><td class="tp">4.3 서류·신고의무<small>고용주</small></td><td class="pain">근무처변경·휴폐업 신고 누락</td><td>행정사 단발</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag">Crew 서류함</span></td></tr>
+            <tr class="sub focus"><td class="tp">4.4 K-Trust 등급 관리<small>고용주</small></td><td class="pain">성실기업 인증 준비 막막(쿼터 -20~30%)</td><td><b>전용 도구 없음</b></td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag">Crew Readiness</span></td></tr>
+            <tr class="sub focus"><td class="tp">4.5 리스크·감사 대응<small>고용주</small></td><td class="pain">점검·단속 대비 증빙 산재</td><td>자체 관리</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag">Crew 리스크점수</span></td></tr>
+
+            <!-- Phase 5 -->
+            <tr class="phase hot"><td colspan="5"><span class="pno">5</span>생활·금융 (Living & Finance)<span class="ptag2">★ 빈 공간 · 핵심 진입</span></td></tr>
+            <tr class="sub focus"><td class="tp">5.1 급여수령·적정성<small>근로자</small></td><td class="pain">명세 이해 못함·체불(연 1,200억)</td><td>없음(내국인용 앱뿐)</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag mb">급여 AI</span></td></tr>
+            <tr class="sub focus"><td class="tp">5.2 본국 송금<small>근로자</small></td><td class="pain">수수료 비싸고 비교 어려움</td><td>한패스·와이어바알리(송금만)</td><td><span class="cov part">단일</span></td><td><span class="ours-tag mb">송금 비교</span></td></tr>
+            <tr class="sub focus"><td class="tp">5.3 소비·보험<small>근로자</small></td><td class="pain">카드·보험 외국인 가입 제한</td><td>제한적</td><td><span class="cov empty">빈틈 ★</span></td><td><span class="ours-tag mb">보험 GA</span></td></tr>
+            <tr class="sub focus"><td class="tp">5.4 신용·대출/대환<small>근로자</small></td><td class="pain">신용없어 거절→사금융 고금리(15~25%)</td><td><b>제도권 부재</b>·사금융</td><td><span class="cov empty">빈 공간 ★★</span></td><td><span class="ours-tag mb">신용스코어·대출</span></td></tr>
+            <tr class="sub focus"><td class="tp">5.5 주거 안정<small>근로자</small></td><td class="pain">보증금·전세 사기 노출</td><td>없음</td><td><span class="cov empty">빈틈 ★</span></td><td><span class="ours-tag mb">전세 체크</span></td></tr>
+
+            <!-- Phase 6 -->
+            <tr class="phase"><td colspan="5"><span class="pno">6</span>이직·자격전환 (Mobility)<span class="ptag2">건별·수동 · 부분 진입</span></td></tr>
+            <tr class="sub"><td class="tp">6.1 근무처 변경<small>근로자+고용주</small></td><td class="pain">사업장 이동 절차·신고 복잡</td><td>고용센터·행정사</td><td><span class="cov part">건별</span></td><td><span class="ours-tag">Crew 전환</span></td></tr>
+            <tr class="sub focus"><td class="tp">6.2 비자 자격전환<small>근로자</small></td><td class="pain">E-9→E-7-4 숙련전환·유학→취업 정보 부족</td><td>행정사 상담</td><td><span class="cov empty">빈틈 ★</span></td><td><span class="ours-tag">Crew 전환관리</span></td></tr>
+            <tr class="sub"><td class="tp">6.3 체류 연장·갱신<small>고용주+근로자</small></td><td class="pain">갱신 시점·서류 반복 관리</td><td>행정사</td><td><span class="cov part">건별</span></td><td><span class="ours-tag">Crew 알림</span></td></tr>
+
+            <!-- Phase 7 -->
+            <tr class="phase"><td colspan="5"><span class="pno">7</span>퇴사·출국 (Exit)<span class="ptag2">부분 커버 · 연계 진입</span></td></tr>
+            <tr class="sub"><td class="tp">7.1 퇴직 정산<small>고용주</small></td><td class="pain">퇴직금·정산 계산 번거로움</td><td>회사 자체·노무사</td><td><span class="cov part">수동</span></td><td><span class="ours-tag">Crew 정산</span></td></tr>
+            <tr class="sub focus"><td class="tp">7.2 출국 준비<small>근로자</small></td><td class="pain">출국만기보험·잔여 권리 안내 부재</td><td>보험사·회사</td><td><span class="cov part">단편</span></td><td><span class="ours-tag mb">출국 패키지</span></td></tr>
+            <tr class="sub"><td class="tp">7.3 4대보험·세금 정산<small>근로자</small></td><td class="pain">정산 누락→환급 권리 상실</td><td>공단 직접</td><td><span class="cov part">난해</span></td><td><span class="ours-tag mb">Moneeback</span></td></tr>
+
+            <!-- Phase 8 -->
+            <tr class="phase hot"><td colspan="5"><span class="pno">8</span>환급·사후 (Refund & Post)<span class="ptag2">★ 빈 공간 · 핵심 진입</span></td></tr>
+            <tr class="sub focus"><td class="tp">8.1 국민연금 반환일시금<small>근로자</small></td><td class="pain">출국 후 직접신청 난해→미수령 방치</td><td>국민연금공단(직접)</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag mb">환급 대행</span></td></tr>
+            <tr class="sub focus"><td class="tp">8.2 고용·산재보험 환급<small>근로자</small></td><td class="pain">권리 인지 못함</td><td>근로복지공단(직접)</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag mb">환급 대행</span></td></tr>
+            <tr class="sub focus"><td class="tp">8.3 퇴직금·세금 환급<small>근로자</small></td><td class="pain">외국인 특화 환급 서비스 없음</td><td>삼쩜삼(내국인용)·클링커즈(중개)</td><td><span class="cov empty">빈 공간 ★</span></td><td><span class="ours-tag mb">환급 대행</span></td></tr>
+            <tr class="sub"><td class="tp">8.4 재입국·재고용<small>고용주+근로자</small></td><td class="pain">성실재입국·재고용 연결 단절</td><td>고용센터</td><td><span class="cov part">단편</span></td><td><span class="ours-tag">Crew 재고용</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 주목 시장 -->
+      <div class="focus-callout">
+        <div class="big">4·5·8</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:6px">우리가 주목할 시장 — 빈 공간 ★ 13개 터치포인트</div>
+          <p>30개 중 페인이 크고 경쟁이 빈 <b>13개 터치포인트</b>가 우리 코어. 특히 <b>④ 재직관리(5) · ⑤ 생활·금융(5) · ⑧ 환급(3)</b>에 집중하고,
+            그중 <b>5.4 신용·대출/대환(★★)</b>이 최대 수익원. ③ 온보딩·⑥ 전환·⑦ 출국의 빈틈은 인접 확장으로 흡수합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- (2) 겹치지 않는 두 기둥 -->
+    <div class="reveal" style="margin-top:44px">
+      <h4 class="block">② 겹치지 않는 두 서비스 — 같은 데이터, 다른 사용자</h4>
+      <div class="pillars">
+        <div class="top">
+          <div class="pillar b2b">
+            <span class="ptag">빈 공간 ① · 고용주가 보는 화면</span>
+            <h5>PlugNX Crew</h5>
+            <div class="sub">B2B · 외국인 고용·체류 준법관리 SaaS</div>
+            <ul>
+              <li>체류만료 자동 알림 <small>(D-120·90·60·30)</small></li>
+              <li>비자별 임금요건 자동 체크</li>
+              <li>서류함 · 기업 리스크 점수</li>
+              <li>전문가 티켓 · 월간 리포트</li>
+              <li>K-Trust Readiness 진단</li>
+            </ul>
+          </div>
+          <div class="vs-chip">≠</div>
+          <div class="pillar b2c">
+            <span class="ptag">빈 공간 ② · 근로자가 보는 화면</span>
+            <h5>Moneeback</h5>
+            <div class="sub">B2C · 환급·급여·금융 앱 (다국어)</div>
+            <ul>
+              <li>연금·보험·퇴직금 환급 <small>(30초 체크)</small></li>
+              <li>AI 급여 적정성 분석</li>
+              <li>비자 D-day · 전세 안전체크</li>
+              <li>송금 비교 · 대출 중개</li>
+              <li>외국인 신용스코어 <small>(확장)</small></li>
+            </ul>
+          </div>
+        </div>
+        <div class="foundation">
+          <div class="fl-tag">하나의 공통 데이터 레이어</div>
+          <h5>같은 사람 · 같은 데이터 — 중복 입력 없음</h5>
+          <p>기업이 PlugNX에 근로자를 등록하면 → 그 데이터로 Moneeback이 환급·급여를 자동 분석. 두 제품은 <b style="color:var(--ink)">기능이 겹치지 않고</b>, 하나의 데이터 위에서 고용주·근로자를 각각 담당합니다.</p>
+        </div>
+      </div>
+      <div class="nonoverlap">
+        <span>🔁 <b>양방향 플라이휠:</b></span>
+        <span>기업 등록 → 근로자 자동 유입 <b>(CAC 0원·전환 60%+)</b></span>
+        <span>→ 근로자 만족 → 기업 근속률↑ → <b>B2B 유지</b></span>
+      </div>
+    </div>
+
+    <!-- (3) 수익 트랙 -->
+    <div class="reveal" style="margin-top:40px">
+      <h4 class="block">③ 각자의 수익 — 역할이 다르니 매출원도 다르다</h4>
+      <div class="grid g4">
+        <div class="card">
+          <div class="tag">PlugNX · B2B</div>
+          <h4 style="font-size:15px">SaaS 구독</h4>
+          <p>Starter 29만 · Growth 89만 · Compliance 169만 · Enterprise 별도. 월 단위 해지.</p>
+        </div>
+        <div class="card">
+          <div class="tag">PlugNX · B2B</div>
+          <h4 style="font-size:15px">전문가 마켓</h4>
+          <p>등록 행정사 3,360·변호사 365 연계. 건당 수수료 20~30% 쉐어.</p>
+        </div>
+        <div class="card">
+          <div class="tag" style="background:#f0f1f3;color:var(--ink)">Moneeback · B2C</div>
+          <h4 style="font-size:15px">환급 대행</h4>
+          <p>연금·보험·퇴직금 성공보수 <b>10~15%</b>. 1인 평균 ARPU 약 140만원.</p>
+        </div>
+        <div class="card">
+          <div class="tag" style="background:#f0f1f3;color:var(--ink)">Moneeback · B2C</div>
+          <h4 style="font-size:15px">금융 중개</h4>
+          <p>송금 비교 · 외국인 대출 · 보험 GA. 향후 K-Bank 등 신용스코어 연계 확장.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 03 시장 타당성 ===== -->
+<section id="market">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">05 · Market Feasibility</h2>
+      <h3 class="title">TAM·SAM·SOM과 시장 추진력</h3>
+      <p class="lead">체류외국인 278만 명을 기준으로 단계적 도달 시장을 산정. 정책 추진력과 인력 부족의 구조성이 시장 성장의 두 축.</p>
+    </div>
+
+    <div class="grid g2 reveal" style="margin-top:32px">
+      <div class="chartbox">
+        <h4>도달 가능 시장</h4>
+        <div class="note">단위: 만 명 · ’25.12 기준</div>
+        <div class="funnel">
+          <div class="fl" style="background:linear-gradient(120deg,#1e3a8a,#2563eb)"><div class="lab">TAM · 전체 체류외국인</div><div class="val">278<small style="margin-left:6px">만 명</small></div></div>
+          <div class="fl" style="background:linear-gradient(120deg,#0e7490,#06b6d4);margin:0 auto;width:84%"><div class="lab">SAM · 장기체류 잠재 고객</div><div class="val">216<small style="margin-left:6px">만 명</small></div></div>
+          <div class="fl" style="background:linear-gradient(120deg,#92400e,#f59e0b);margin:0 auto;width:64%"><div class="lab">SOM · 초기 3년 현실 타깃</div><div class="val">15<small style="margin-left:6px">만 명</small></div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:14px;border-top:1px solid var(--border);padding-top:12px">
+          <span>B2B TAM <b style="color:var(--ink)">49만</b> (E계열 취업)</span>
+          <span>B2C TAM <b style="color:var(--ink)">216만</b> (전체 장기)</span>
+        </div>
+      </div>
+      <div class="chartbox">
+        <h4>시장 추진 강도 (5점)</h4>
+        <div class="note">인접 시장별 진입 매력도 — 자체 평가</div>
+        <div class="canvas-h"><canvas id="radarChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid g3 reveal" style="margin-top:24px">
+      <div class="card">
+        <h4>📈 정주화 가속</h4>
+        <p>유학생 +220%(9.4→30.1만), 동반가족 +236%(2.2→7.4만), 전문인력 +121%(4.7→10.4만). 노동시장 → 생활·금융 시장으로 전환.</p>
+      </div>
+      <div class="card">
+        <h4>🏭 구조적 인력난</h4>
+        <p>’30년 부족 인력 112.5만 명(최소). 외국인 고용 사유 <b>90.6%가 “내국인 채용난”</b>(중기중앙회). 단기 경기 아닌 구조 수요.</p>
+      </div>
+      <div class="card">
+        <h4>🏛️ 정책 정합</h4>
+        <p>K-Trust 인증제·디지털 비자 행정·임금 자문위·신규 비자(K-CORE, K-STAR) — 5대 과제가 민간 SaaS에 직접 매핑됨.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 제품 타당성 ===== -->
+<section id="product" class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">06 · Product Feasibility</h2>
+      <h3 class="title">MVP는 이미 라이브 — 제품 위험은 검증됨</h3>
+      <p class="lead">
+        <a href="https://plugnx-visaops.netlify.app" target="_blank" style="color:var(--accent);font-weight:600">plugnx-visaops.netlify.app</a>에 핵심 기능이 가동 중. B2B 25페이지 대시보드, 자가진단 9문항, 리드 API, 다국어 근로자 페이지까지 구현 완료.
+      </p>
+    </div>
+
+    <div class="features reveal" style="margin-top:32px">
+      <div class="cell"><h5><span class="check">✓</span> 체류만료 자동 알림</h5><p>D-120·90·60·30 사전 알림으로 만료 사고 원천 방지.</p></div>
+      <div class="cell"><h5><span class="check">✓</span> 비자별 임금요건 자동 체크</h5><p>E-7-1·2·3·4 매년 변경 기준을 자동 비교·경고.</p></div>
+      <div class="cell"><h5><span class="check">✓</span> 서류함 & 문서 추적</h5><p>비자유형별 필수 서류 누락·만료 자동 추적, 검색 가능.</p></div>
+      <div class="cell"><h5><span class="check">✓</span> 전문가 티켓 (1클릭 연결)</h5><p>행정사·노무사·변호사에게 케이스 즉시 이관.</p></div>
+      <div class="cell"><h5><span class="check">✓</span> 기업 리스크 점수</h5><p>체류·임금·서류·노무·숙소를 100점으로 종합 점수화.</p></div>
+      <div class="cell"><h5><span class="check">✓</span> K-Trust Readiness</h5><p>A/B/C 등급 시뮬레이터 + 격상 액션 자동 추천.</p></div>
+      <div class="cell"><h5><span class="check">✓</span> Moneeback 환급</h5><p>연금·보험·퇴직금 30초 체크. 다국어(한·영·베).</p></div>
+      <div class="cell"><h5><span class="check">✓</span> 1분 자가진단</h5><p>9문항 클릭형 → 적합 플랜 추천 + 추천 이유 제시.</p></div>
+      <div class="cell"><h5><span class="check">✓</span> 리드 수집 API</h5><p>/api/lead → Slack · Resend · 콘솔 fallback.</p></div>
+    </div>
+
+    <div class="grid g2 reveal" style="margin-top:24px">
+      <div class="card">
+        <h4>🔬 기술 스택 — 검증된 모던 스택</h4>
+        <p style="margin-top:10px">Next.js 15 · React 19 · Tailwind 4 · Supabase · OpenAI(GPT-4V) · Vercel/Netlify. 모두 양산 안정 단계.</p>
+        <div style="margin-top:14px">
+          <span class="pill">Next.js 15</span><span class="pill">React 19</span><span class="pill">Tailwind 4</span><span class="pill">Supabase</span><span class="pill">OpenAI</span><span class="pill">Netlify</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>📊 분석·운영 인프라</h4>
+        <p style="margin-top:10px">Plausible/GA4 이벤트 추적, Slack/이메일 리드 알림, 다국어 i18n, 환경변수 기반 구성. 운영 자동화 준비 완료.</p>
+        <div style="margin-top:14px">
+          <span class="pill">cta_click</span><span class="pill">diagnose_complete</span><span class="pill">lead_submit_success</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 경쟁 타당성 ===== -->
+<section id="competition">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">07 · Competitive Feasibility</h2>
+      <h3 class="title">기존 플레이어가 못 잡는 ‘공백’을 잡는다</h3>
+      <p class="lead">기존 시장은 [채용 플랫폼]→매칭→입사 후 <b style="color:var(--danger)">관리 공백</b>→퇴사·출국 후 <b style="color:var(--danger)">환급 공백</b>. PlugNX × Moneeback은 채용 이후 구간 전체를 잡는 유일한 사업자.</p>
+    </div>
+
+    <div class="reveal" style="margin-top:32px;overflow-x:auto">
+      <table class="dt">
+        <thead><tr>
+          <th style="width:18%">기존 플레이어</th>
+          <th style="width:24%">하는 것</th>
+          <th style="width:24%">못 하는 것</th>
+          <th>PlugNX × Moneeback 차별점</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><b>외국인 채용 플랫폼</b></td><td>매칭·채용공고</td><td>채용 이후 관리</td><td>채용 이후 전 생애주기 관리</td></tr>
+          <tr><td><b>행정사·변호사</b></td><td>비자 신청 대행</td><td>반복 관리·데이터 축적</td><td>전문가를 플랫폼에 연결 (마켓)</td></tr>
+          <tr><td><b>노무사</b></td><td>근로계약·임금</td><td>비자·체류 데이터 연결</td><td>노무 + 비자 통합 관리</td></tr>
+          <tr><td><b>삼쩜삼</b></td><td>세금 환급</td><td>외국인 특화 부재</td><td>외국인 전용 (연금·보험·퇴직금)</td></tr>
+          <tr><td><b>정부 (HiKorea)</b></td><td>공식 민원</td><td>기업용 관리·사전진단</td><td>정부 시스템의 민간 운영 인프라</td></tr>
+          <tr><td><b>클링커즈 (glow)</b></td><td>환급 중개</td><td>인증 기술·해자 미보유</td><td>인증 인프라 자체 보유</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reveal" style="margin-top:32px">
+      <h4 class="block">경쟁 해자 — 5선</h4>
+      <div class="grid g3" style="margin-top:6px">
+        <div class="card"><h4>① 양면 네트워크</h4><p>B2B↔B2C가 서로의 가치를 키움. CAC 0원 + 근속률 ↑로 단방향 경쟁자가 따라올 수 없음.</p></div>
+        <div class="card"><h4>② 데이터 독점</h4><p>고용(Crew) + 금융(Moneeback) 데이터 결합 = <b>외국인 신용스코어</b>. 장기적 CB 사업의 자산.</p></div>
+        <div class="card"><h4>③ 정책 정합성</h4><p>K-Trust·K-CORE·임금 자문위·쿼터 사전공표 — 정부 정책과 직접 매핑되는 제품 구조.</p></div>
+        <div class="card"><h4>④ 전환 비용</h4><p>근로자 데이터·서류·이력이 축적될수록 이탈 불가. 작은 회사도 1년 후엔 SaaS 없이는 운영 불가.</p></div>
+        <div class="card"><h4>⑤ 전문가 네트워크</h4><p>행정사 3,360·변호사 365·노무사 등 등록 전문가 마켓이 유통·검증 채널이자 진입 장벽.</p></div>
+        <div class="card" style="background:var(--soft)"><h4>+ 브랜드 신뢰</h4><p>법무부 정책 문서 인용·공식 면책 고지·다국어 안내까지 — 영세 사업자가 안심하고 도입할 수 있는 신뢰 자산.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 06 재무 타당성 ===== -->
+<section id="financial" class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">08 · Financial Feasibility</h2>
+      <h3 class="title">한 번만 막아도 본전 — ROI가 자기 입증</h3>
+      <p class="lead">외국인 1명 잘못 관리하면 월 구독료보다 큰 비용이 새어 나갑니다. 고객 ROI가 명확해 단가 협상 압력이 낮고, 단위경제(Unit Economics)는 양면 플라이휠이 강화합니다.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;font-weight:600;color:var(--accent);background:#eef4ff;border:1px solid #d6e4ff;border-radius:999px;padding:7px 14px">
+        ⚠ 아래 매출·ARR 수치는 <b style="margin:0 3px">확정 실적이 아니라 가정 기반 목표치</b>입니다 (전환율·단가·해지율 가정).
+      </div>
+    </div>
+
+    <div class="grid g2 reveal" style="margin-top:32px">
+      <div class="chartbox">
+        <h4>성장 시나리오 — 목표 (ARR · 억원)</h4>
+        <div class="note">가정 기반 목표치 · PoC → 12 → 24개월</div>
+        <div class="canvas-h"><canvas id="arrChart"></canvas></div>
+      </div>
+      <div class="chartbox">
+        <h4>고객 ROI 시뮬레이션 (외국인 30명 기준)</h4>
+        <div class="note">월 89만원 Growth 플랜 도입 시 — 회피 가능 비용 vs 구독료</div>
+        <div class="canvas-h"><canvas id="roiChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:24px;overflow-x:auto">
+      <h4 class="block">단위경제 핵심 지표 <span style="font-weight:400;color:var(--muted);font-size:12px">— 가정 기반 목표치</span></h4>
+      <table class="dt">
+        <thead><tr><th>지표</th><th>목표값 (가정)</th><th>근거 / 가정</th></tr></thead>
+        <tbody>
+          <tr><td><b>B2B ARPA (월)</b></td><td>약 89만원 (Growth 기준)</td><td>가중 평균 — Starter 29 · Growth 89 · Compliance 169</td></tr>
+          <tr><td><b>B2C ARPU (회당)</b></td><td>약 140만원 (환급 1건)</td><td>1,050만 환급 × 13% 성공보수 가정</td></tr>
+          <tr><td><b>B2C CAC</b></td><td>0원 (목표)</td><td>B2B 등록 → 자동 유입 (전환 60%+ 가정)</td></tr>
+          <tr><td><b>해지율 (Churn)</b></td><td>월 1~2% (가정)</td><td>데이터 축적·전문가 연계로 이탈 비용 큼</td></tr>
+          <tr><td><b>매출 12개월 (목표)</b></td><td>ARR 약 21억 <span style="color:var(--muted);font-size:11px">(가정)</span></td><td>Crew 17.3 + Moneeback 3.7</td></tr>
+          <tr><td><b>매출 24개월 (목표)</b></td><td>ARR 약 60억 <span style="color:var(--muted);font-size:11px">(가정)</span></td><td>300사 · 외국인 10,000 · 유저 100,000 가정</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 08 금융 확장 (대출·대환) ===== -->
+<section id="finance-expansion" class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">09 · Financial Expansion</h2>
+      <h3 class="title">진짜 큰 돈은 ‘대출·대환’에 있고, 그곳이 비어 있다</h3>
+      <p class="lead">
+        재직관리(B2B)와 환급(B2C)은 <b style="color:var(--ink)">진입 wedge</b>입니다. 노동자를 모으고 데이터를 쌓는 입구죠.
+        하지만 외국인에게서 나올 수 있는 가장 큰 수익은 <b style="color:var(--ink)">금융 — 특히 대출·대환대출</b>이며, 이 시장은 아직 아무도 제대로 잡지 못했습니다.
+      </p>
+    </div>
+
+    <!-- (1) 왜 노동자가 쓰는가 -->
+    <div class="reveal" style="margin-top:36px">
+      <h4 class="block">① 왜 노동자가 쓰는가 — 환급이 만드는 강력한 유입 고리</h4>
+      <div class="grid g4">
+        <div class="card">
+          <div class="num" style="font-size:28px">즉시 <span style="font-size:15px;color:var(--muted)">현금</span></div>
+          <h4 style="font-size:15px">못 받은 돈을 돌려받는다</h4>
+          <p>연금·보험·퇴직금 1인 평균 1,050만원. ‘쓰면 돈이 생기는’ 가장 강한 동기.</p>
+        </div>
+        <div class="card">
+          <div class="num" style="font-size:28px">안심</div>
+          <h4 style="font-size:15px">손해·사기를 막는다</h4>
+          <p>급여 적정성 AI 체크(체불 방지), 전세 안전체크, 비싼 송금 비교. 모국어로 안전하게.</p>
+        </div>
+        <div class="card">
+          <div class="num" style="font-size:28px">편의</div>
+          <h4 style="font-size:15px">한 곳에서 모국어로</h4>
+          <p>비자 D-day·환급·급여·송금을 흩어진 기관 대신 한 앱에서. 회사가 등록해줘 가입 장벽 0.</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--accent)">
+          <div class="num" style="font-size:28px">미래</div>
+          <h4 style="font-size:15px">신용이 쌓인다</h4>
+          <p>고용·소득·환급 이력이 곧 <b>금융 자격</b>으로. 대출·대환의 문이 열린다 — 아래 ②~④.</p>
+        </div>
+      </div>
+      <div class="nonoverlap"><span>💡 환급은 <b>돈을 주는 서비스</b>라 유입·재방문이 강하고, 그 과정에서 쌓인 데이터가 다음 단계(금융)의 연료가 됩니다.</span></div>
+    </div>
+
+    <!-- (2) 비어있는 시장 -->
+    <div class="reveal" style="margin-top:44px">
+      <h4 class="block">② 왜 비어 있나 — 외국인 금융 사각지대</h4>
+      <div class="grid g3">
+        <div class="swot warn">
+          <h4>외국인이 막히는 이유</h4>
+          <ul>
+            <li>신용정보 부재 → 은행이 리스크 평가 불가 → 취급 회피</li>
+            <li>계좌·KYC 난이도 → 비대면 대출 진입 장벽</li>
+            <li>이직·출국 시 회수 불안 → 은행이 꺼림</li>
+          </ul>
+        </div>
+        <div class="swot warn">
+          <h4>그 결과 — 고금리에 갇힘</h4>
+          <ul>
+            <li>제도권 대출 거절 → 카드론·사금융·불법 사채로</li>
+            <li>본국 송금·급전 수요는 큰데 채널이 비쌈</li>
+            <li>대환(갈아타기) 통로 자체가 없음</li>
+          </ul>
+        </div>
+        <div class="swot ok">
+          <h4>우리만의 열쇠</h4>
+          <ul>
+            <li>재직관리 = 고용·체류·근속 데이터 보유</li>
+            <li>환급 = 소득·급여·환급 이력 보유</li>
+            <li>둘을 합치면 <b>은행이 못 보던 외국인을 평가</b> 가능</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- (3) 데이터 → 신용스코어 → 대출 플로우 -->
+    <div class="reveal" style="margin-top:44px">
+      <h4 class="block">③ 데이터가 신용이 된다 — 외국인 신용스코어 플로우</h4>
+      <div class="flow">
+        <div class="box src">
+          <div class="bt">B2B · 재직관리</div>
+          <h5>PlugNX Crew</h5>
+          <p>체류·고용·근속·임금 데이터</p>
+        </div>
+        <div class="arr">+</div>
+        <div class="box src">
+          <div class="bt">B2C · 환급</div>
+          <h5>Moneeback</h5>
+          <p>소득·급여·환급 이력</p>
+        </div>
+        <div class="arr">→</div>
+        <div class="box score">
+          <div class="bt">대안신용평가</div>
+          <h5>외국인 신용스코어</h5>
+          <p>은행이 평가 못하던 리스크를 데이터로 산정</p>
+        </div>
+        <div class="arr">→</div>
+        <div class="box out">
+          <div class="bt">금융 (K-Bank 연계)</div>
+          <h5>대출 · 대환대출</h5>
+          <p>제도권 여신 + 회수 인프라</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- (4) 대환 강조 + K-Bank 모델 -->
+    <div class="reveal" style="margin-top:44px">
+      <h4 class="block">④ 핵심 기회 — ‘대환대출’: 고금리 사금융 → 제도권 저금리</h4>
+      <div class="refi">
+        <div class="side before">
+          <div class="lab">현재 · 외국인 현실</div>
+          <div class="rate">15~25%<small> / 연</small></div>
+          <p>카드론·사금융·불법 사채. 신용 없어 갈아탈 곳도 없음.</p>
+        </div>
+        <div class="mid">→</div>
+        <div class="side after">
+          <div class="lab">우리 신용스코어 + K-Bank</div>
+          <div class="rate">5~9%<small> / 연</small></div>
+          <p>대안평가로 제도권 대환. 회수는 급여공제·체류추적으로 안전.</p>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:14px;line-height:1.6">
+        ※ 금리는 시장 일반 수준의 예시이며 실제 상품 설계·심사에 따라 달라집니다. K-Bank는 비대면·외국인 친화 인터넷전문은행으로 연계 적합성이 높은 예시 제휴처입니다.
+      </p>
+
+      <div class="grid g3" style="margin-top:20px">
+        <div class="card">
+          <div class="tag">유입·예수금</div>
+          <h4 style="font-size:15px">계좌개설 + 급여이체</h4>
+          <p>ForeignID KYC로 비대면 계좌개설, 급여이체 유도 → 은행 신규고객·저원가 예금.</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--accent)">
+          <div class="tag">★ 핵심</div>
+          <h4 style="font-size:15px">대출·대환 중개</h4>
+          <p>신용스코어 기반 외국인 전용 여신. 사금융→제도권 갈아타기(대환) 수수료가 큰 수익원.</p>
+        </div>
+        <div class="card">
+          <div class="tag">저위험 상품</div>
+          <h4 style="font-size:15px">담보형 여신</h4>
+          <p>출국만기보험·퇴직금 담보, 급여 선지급(EWA), 전세보증금 — 상환재원이 구조적으로 확정.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- (5) 단계 로드맵 -->
+    <div class="reveal" style="margin-top:40px">
+      <h4 class="block">⑤ 단계적 진입 — 규제 부담을 낮추며</h4>
+      <div class="funnel">
+        <div class="fl" style="background:linear-gradient(120deg,#1e3a8a,#2563eb)"><div class="lab">STEP 1 · Moneeback 금융탭</div><div class="val">송금·대출 비교 중개 <small>(제휴 수수료)</small></div></div>
+        <div class="fl" style="background:linear-gradient(120deg,#0e7490,#06b6d4);margin:0 auto;width:85%"><div class="lab">STEP 2 · 신용스코어 v1</div><div class="val">내부 스코어링·데이터 축적</div></div>
+        <div class="fl" style="background:linear-gradient(120deg,#7c3a12,#f59e0b);margin:0 auto;width:71%"><div class="lab">STEP 3 · K-Bank 대출·대환 PoC</div><div class="val">외국인 전용 여신 <small>(중개 수수료)</small></div></div>
+        <div class="fl" style="background:linear-gradient(120deg,#065f46,#10b981);margin:0 auto;width:58%"><div class="lab">STEP 4 · CB 사업화</div><div class="val">신용평가 라이선스·B2B 판매</div></div>
+      </div>
+      <div class="grid g3" style="margin-top:20px">
+        <div class="card" style="border-top:3px solid var(--danger)"><h4 style="font-size:14px">규제 체크</h4><p style="font-size:12.5px">대부중개업·신용정보법·전자금융업 — 단계별 라이선스 확보 후 진입. 초기엔 ‘비교·중개’로 시작.</p></div>
+        <div class="card"><h4 style="font-size:14px">리스크 분산</h4><p style="font-size:12.5px">여신은 K-Bank가 부담, 우리는 데이터·중개. 자본 부담 없이 수수료 수익.</p></div>
+        <div class="card"><h4 style="font-size:14px">시장 규모</h4><p style="font-size:12.5px">잠재 차주 100만+ (E-9 33.7만·F-4 55.6만 등 취업·정주군). 대환 수요는 즉시 발생.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 09 운영·규제 타당성 ===== -->
+<section id="ops">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">10 · Operational & Regulatory</h2>
+      <h3 class="title">실행 경로와 리스크 — 모두 관리 가능 범위</h3>
+      <p class="lead">GTM은 산단·요양협회 세미나 채널을 통해 검증된 깔때기. 규제는 ‘플랫폼은 관리, 신청 결정은 정부’ 구조로 본질적 위험을 분산.</p>
+    </div>
+
+    <div class="grid g2 reveal" style="margin-top:32px">
+      <div class="chartbox">
+        <h4>GTM 깔때기 (8주 PoC)</h4>
+        <div class="note">세미나 50사 → PoC 미팅 20사 → 유료 계약 15사 (전환율 30%)</div>
+        <div class="funnel" style="margin-top:12px">
+          <div class="fl" style="background:linear-gradient(120deg,#1e3a8a,#2563eb)"><div class="lab">산단·요양협회 세미나</div><div class="val">50<small style="margin-left:6px">개사</small></div></div>
+          <div class="fl" style="background:linear-gradient(120deg,#0e7490,#06b6d4);margin:0 auto;width:78%"><div class="lab">PoC 미팅 진행</div><div class="val">20<small style="margin-left:6px">개사</small></div></div>
+          <div class="fl" style="background:linear-gradient(120deg,#92400e,#f59e0b);margin:0 auto;width:58%"><div class="lab">유료 계약 (전환 30%)</div><div class="val">15<small style="margin-left:6px">개사</small></div></div>
+        </div>
+      </div>
+      <div class="grid" style="gap:14px">
+        <div class="swot warn">
+          <h4>리스크 · 대응</h4>
+          <ul>
+            <li><b>정책 의존</b> — B2B2C·국경 간 수요로 분산</li>
+            <li><b>反이민정서</b> — 양측 가치 제공으로 우회</li>
+            <li><b>금융·개인정보 규제</b> — 최소 수집·암호화·제휴사 리스크 부담 설계</li>
+            <li><b>초기 데이터·영업</b> — PoC 15사 우선 확보 후 확장</li>
+          </ul>
+        </div>
+        <div class="swot ok">
+          <h4>규제 체크 — 본질적 위험 분산 구조</h4>
+          <ul>
+            <li><b>출입국 결정은 정부</b> 권한 — 플랫폼은 관리·워크플로 역할만</li>
+            <li><b>대출 중개·신용정보</b> — 별도 라이선스 필요시 단계적 진입</li>
+            <li><b>개인정보보호법</b> — 동의 기반·국내 저장·접근권한 분리</li>
+            <li><b>전자금융</b> — Moneeback 환급은 위임·대행 모델</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:24px">
+      <h4 class="block">90일 실행 로드맵</h4>
+      <div class="grid g3" style="margin-top:6px">
+        <div class="card"><div class="tag">DAY 0–30</div><h4 style="font-size:16px">파일럿 15사 확보</h4><p>산단·요양협회 세미나 5건 + 무료 PoC 진단 캠페인. 자가진단 → 리드 → 영업 파이프 가동.</p></div>
+        <div class="card"><div class="tag">DAY 30–60</div><h4 style="font-size:16px">전문가·결제 가동</h4><p>행정사·노무사 등록 50명 확보, Resend/Slack 알림 연결, Stripe 구독결제 도입.</p></div>
+        <div class="card"><div class="tag">DAY 60–90</div><h4 style="font-size:16px">K-Trust 시뮬레이터 강화</h4><p>A 격상 액션 추천 알고리즘 고도화 + 모의점검 컨설팅(100~300만/건) 본격 영업.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 09 기대효과 / KPI ===== -->
+<section id="kpi">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="sec">11 · Expected Outcomes & KPI</h2>
+      <h3 class="title">기대효과와 성과지표 (목표)</h3>
+      <p class="lead">사업을 추진했을 때의 <b style="color:var(--ink)">가정 기반 목표치</b>와, 그것을 점검할 단계별 KPI. 확정 실적이 아니라 추진 시 달성을 노리는 목표이며, 보고 후 의사결정·진척 점검의 기준이 됩니다.</p>
+    </div>
+
+    <div class="reveal" style="margin-top:32px;overflow-x:auto">
+      <table class="dt">
+        <thead><tr>
+          <th style="width:22%">지표 (목표)</th>
+          <th>PoC (8주)</th>
+          <th>6개월</th>
+          <th>12개월</th>
+          <th>24개월</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><b>유료 기업 (B2B)</b></td><td>15사</td><td>40사</td><td>100사</td><td>300사</td></tr>
+          <tr><td><b>관리 외국인</b></td><td>300명</td><td>1,000명</td><td>3,000명</td><td>10,000명</td></tr>
+          <tr><td><b>Moneeback 유저 (B2C)</b></td><td>500명</td><td>5,000명</td><td>30,000명</td><td>100,000명</td></tr>
+          <tr><td><b>ARR</b></td><td>—</td><td>3.8억</td><td><b>21억</b></td><td><b>60억</b></td></tr>
+          <tr><td><b>전환율 (세미나→계약)</b></td><td>30%</td><td>32%</td><td>35%</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g4 reveal" style="margin-top:24px">
+      <div class="card"><div class="num" style="font-size:28px">2,000<span style="font-size:15px;color:var(--muted)">만원</span></div><h4 style="font-size:14px">사고비용 회피</h4><p>고용주 1사당 불법체류 과태료 등 회피.</p></div>
+      <div class="card"><div class="num" style="font-size:28px">1,050<span style="font-size:15px;color:var(--muted)">만원</span></div><h4 style="font-size:14px">근로자 환급</h4><p>1인 평균 미수령 연금·보험·퇴직금 회수.</p></div>
+      <div class="card"><div class="num" style="font-size:28px">0<span style="font-size:15px;color:var(--muted)">원</span></div><h4 style="font-size:14px">B2C 획득비용</h4><p>B2B 등록 → 자동 유입(전환 60%+).</p></div>
+      <div class="card"><div class="num" style="font-size:28px">3<span style="font-size:15px;color:var(--muted)">중</span></div><h4 style="font-size:14px">사회적 효과</h4><p>기업 준법 · 근로자 권익 · 정책 성과 동시 기여.</p></div>
+    </div>
+
+    <div class="grid g3 reveal" style="margin-top:24px">
+      <div class="card"><h4>기업 효과</h4><p>체류·임금·서류 리스크 자동 차단으로 과태료·인력공백 방지. K-Trust A등급으로 쿼터·Fast Track 확보.</p></div>
+      <div class="card"><h4>근로자 효과</h4><p>못 받은 돈 회수 + 급여 적정성 + 금융 접근성. 모국어로 안전하게 한국 정착 지원.</p></div>
+      <div class="card"><h4>정책·사회 효과</h4><p>불법체류 예방·사회통합 촉진·외국인 권익보호 — 「2030 이민정책 미래전략」 5대 과제에 직접 기여.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10 결론 ===== -->
+<section id="conclusion" class="alt">
+  <div class="wrap">
+    <div class="reveal verdict">
+      <div class="label">12 · Conclusion</div>
+      <h2>다섯 축 모두 타당. 진입은 합리적입니다.</h2>
+      <p>
+        <b>시장</b>은 정주화·구조적 인력난·정책 골든타임의 트리플 추진력이 작동하고,
+        <b>제품</b>은 MVP가 이미 라이브로 가동 중이며, <b>경쟁</b>은 양면 네트워크와 데이터 해자로 모방 난이도가 높습니다.
+        <b>재무</b>는 고객 ROI가 자기 입증하는 구조로 단가 협상 압력이 낮고, <b>운영·규제</b>는 ‘플랫폼은 관리, 결정은 정부’의 책임 분산 설계로 본질적 위험을 회피합니다.
+      </p>
+      <div class="meta">
+        <span><b>타깃 12개월:</b> ARR 21억 · 100사 · 외국인 3,000명</span>
+        <span><b>타깃 24개월:</b> ARR 60억 · 300사 · 유저 10만</span>
+        <span><b>핵심 다음 액션:</b> PoC 15사 + 알림·결제·CB 시드</span>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="pill-btn lg" style="background:#fff;color:var(--ink);border-color:#fff" href="https://plugnx-visaops.netlify.app" target="_blank">🏢 Crew 라이브 검증 →</a>
+        <a class="pill-btn lg ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.3)" href="https://plugnx-visaops.netlify.app/workers" target="_blank">💰 Moneeback 라이브 →</a>
+        <a class="pill-btn lg ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.3)" href="#purpose">처음으로 ↑</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b>외국인 신사업 — 목적 및 타당성</b><br/>
+      PlugNX × Moneeback · 작성 2026.05 · 내부 검토용
+    </div>
+    <div>
+      출처 · 법무부 「2030 이민정책 미래전략」(2026.3), 통계청, 노동부, 중기중앙회 ’23,<br/>
+      PlugNX × Moneeback 통합 사업기획서 v1.0, <a href="https://plugnx-visaops.netlify.app" target="_blank" style="color:var(--accent)">라이브 MVP</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Reveal animation */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }});
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Chart common defaults */
+const FONT = 'Inter, Pretendard, system-ui, sans-serif';
+Chart.defaults.font.family = FONT;
+Chart.defaults.color = '#5b616e';
+Chart.defaults.borderColor = '#e5e7eb';
+
+/* Radar chart — 진입 매력도 */
+new Chart(document.getElementById('radarChart'), {
+  type: 'radar',
+  data: {
+    labels: ['시장규모', '성장성', '정책정합', '진입용이', '수익성'],
+    datasets: [
+      { label: 'RegTech (Crew)', data: [4,5,5,4,4],
+        borderColor:'#0052ff', backgroundColor:'rgba(0,82,255,0.12)', borderWidth:2, pointBackgroundColor:'#0052ff' },
+      { label: 'FinTech (Moneeback)', data: [5,4,4,3,5],
+        borderColor:'#10b981', backgroundColor:'rgba(16,185,129,0.10)', borderWidth:2, pointBackgroundColor:'#10b981' },
+      { label: 'HRTech (K-Trust)', data: [3,5,5,4,4],
+        borderColor:'#0a0b0d', backgroundColor:'rgba(10,11,13,0.08)', borderWidth:2, pointBackgroundColor:'#0a0b0d' },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
+    scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, font: { size: 10 } },
+      grid: { color: '#e5e7eb' }, angleLines: { color: '#e5e7eb' },
+      pointLabels: { font: { size: 12, weight: '600' }, color: '#0a0b0d' } } }
+  }
+});
+
+/* ARR growth chart */
+new Chart(document.getElementById('arrChart'), {
+  type: 'bar',
+  data: {
+    labels: ['3개월','6개월','12개월','24개월'],
+    datasets: [
+      { type: 'bar', label: 'ARR (억원)', data: [1.08, 3.84, 21, 60],
+        backgroundColor: '#0052ff', borderRadius: 6, yAxisID: 'y' },
+      { type: 'line', label: 'Moneeback 유저 (명)', data: [500, 5000, 30000, 100000],
+        borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 2.5, tension: 0.35,
+        pointRadius: 4, yAxisID: 'y1', order: 1 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } } },
+    scales: {
+      y: { position: 'left', title: { display: true, text: 'ARR (억원)', color: '#5b616e' },
+           grid: { color: '#e5e7eb' }, ticks: { callback: v => v + '억' } },
+      y1: { position: 'right', title: { display: true, text: '유저 수', color: '#5b616e' },
+            grid: { display: false }, ticks: { callback: v => v >= 10000 ? (v/10000)+'만' : v.toLocaleString() } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+/* ROI chart — 회피 비용 vs 구독료 */
+new Chart(document.getElementById('roiChart'), {
+  type: 'bar',
+  data: {
+    labels: ['PlugNX 연 구독료', '회피 가능 비용'],
+    datasets: [
+      { label: '연 비용 (만원)',
+        data: [89*12, 2000 + 1500 + 240 /* 행정사 절감 */ + 600 /* K-Trust 기회손실 일부 */],
+        backgroundColor: ['#5b616e', '#0052ff'], borderRadius: 6, barThickness: 60 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    plugins: { legend: { display: false },
+      tooltip: { callbacks: { label: (c) => c.parsed.x.toLocaleString() + '만원' } } },
+    scales: {
+      x: { grid: { color: '#e5e7eb' }, ticks: { callback: v => v.toLocaleString() + '만' } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+</script>
+
+<!-- Floating PDF action (어느 화면에서든 전환/다운로드) -->
+<div class="pdf-fab" role="group" aria-label="PDF 보기 및 다운로드">
+  <a href="business-case-9fk2x7.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="lbl">PDF 보기</span></a>
+  <a class="dl" href="business-case-9fk2x7.pdf" download="외국인신사업_목적및타당성.pdf" aria-label="PDF 다운로드"><span class="ic">⬇</span><span class="lbl">다운로드</span></a>
+</div>
+</body>
+</html>

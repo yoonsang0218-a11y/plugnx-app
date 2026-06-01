@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>VisaDesk 관리자 대시보드 (데모) · PlugNX</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#121a2e; --panel2:#172139; --ink:#eaf1ff; --muted:#8a9bc4;
+    --line:#243154; --blue:#5aa9ff; --blue2:#2563eb; --green:#34d399; --gold:#f5c451;
+    --violet:#b794f6; --cyan:#22d3ee; --red:#f87171; --radius:16px;
+    --side:248px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Pretendard',system-ui,sans-serif;color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;min-height:100vh;
+    background:
+      radial-gradient(900px 480px at 80% -10%,rgba(37,99,235,.30),transparent 60%),
+      radial-gradient(700px 460px at 10% 8%,rgba(34,211,238,.16),transparent 55%),#0a0e1a;}
+  a{color:var(--blue);text-decoration:none}
+  h1,h2,h3{letter-spacing:-.5px;line-height:1.18}
+  .muted{color:var(--muted)}
+  .grad{background:linear-gradient(120deg,#67e8f9,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;
+    padding:13px 22px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:.18s}
+  .btn-primary{background:linear-gradient(120deg,#2563eb,#22d3ee);color:#04122e;border:none}
+  .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:#3a4d7a;background:rgba(255,255,255,.07)}
+  .btn.sm{font-size:12.5px;padding:8px 14px;border-radius:10px}
+
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .badge{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:999px;letter-spacing:.4px;display:inline-flex;align-items:center;gap:5px}
+  .badge.live{background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+  .badge.local{background:rgba(245,196,81,.14);color:var(--gold);border:1px solid rgba(245,196,81,.3)}
+  .badge.red{background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.32)}
+  .badge.gold{background:rgba(245,196,81,.14);color:var(--gold);border:1px solid rgba(245,196,81,.3)}
+  .badge.green{background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+  .badge.blue{background:rgba(90,169,255,.14);color:var(--blue);border:1px solid rgba(90,169,255,.3)}
+
+  /* ===== App shell ===== */
+  .app{display:grid;grid-template-columns:var(--side) 1fr;min-height:100vh}
+
+  /* ===== Sidebar ===== */
+  .side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    background:rgba(9,13,24,.86);backdrop-filter:blur(10px);border-right:1px solid var(--line);
+    display:flex;flex-direction:column;padding:18px 14px 14px}
+  .side::-webkit-scrollbar{width:8px}
+  .side::-webkit-scrollbar-thumb{background:#1d2745;border-radius:8px}
+  .brand{display:flex;align-items:center;gap:10px;padding:6px 8px 14px}
+  .logo{font-weight:900;font-size:19px;letter-spacing:-.5px}
+  .logo span{color:var(--cyan)}
+  .brand .pill{font-size:10px;font-weight:800;color:var(--blue);background:rgba(90,169,255,.12);
+    border:1px solid rgba(90,169,255,.28);padding:3px 7px;border-radius:7px}
+  .nav-sec{font-size:10.5px;font-weight:800;letter-spacing:1.5px;color:#5e6e95;text-transform:uppercase;
+    margin:16px 10px 7px}
+  .nav-a{display:flex;align-items:center;gap:10px;padding:8.5px 11px;border-radius:10px;color:#b9c6e8;
+    font-size:13.5px;font-weight:600;cursor:pointer;transition:.13s;position:relative}
+  .nav-a .ico{width:18px;text-align:center;font-size:14px;opacity:.92}
+  .nav-a:hover{background:rgba(255,255,255,.05);color:#fff}
+  .nav-a.active{background:linear-gradient(120deg,rgba(37,99,235,.30),rgba(34,211,238,.14));
+    color:#fff;border:1px solid rgba(90,169,255,.32)}
+  .nav-a.active:before{content:"";position:absolute;left:-14px;top:9px;bottom:9px;width:3px;
+    border-radius:3px;background:linear-gradient(180deg,#22d3ee,#2563eb)}
+  .nav-a .tag{margin-left:auto;font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:6px}
+  .nav-a .tag.r{background:rgba(248,113,113,.18);color:var(--red)}
+  .nav-a .tag.g{background:rgba(245,196,81,.16);color:var(--gold)}
+  .side-foot{margin-top:auto;padding:14px 8px 4px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+  .side-foot a{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
+  .side-foot a:hover{color:var(--blue)}
+
+  /* ===== Main ===== */
+  .main{display:flex;flex-direction:column;min-width:0}
+  .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;
+    padding:14px 26px;backdrop-filter:blur(10px);background:rgba(10,14,26,.72);border-bottom:1px solid var(--line)}
+  .hamb{display:none;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);
+    width:40px;height:40px;border-radius:10px;font-size:18px;cursor:pointer}
+  .co{display:flex;flex-direction:column;line-height:1.25}
+  .co .nm{font-size:16px;font-weight:800}
+  .co .sub{font-size:11.5px;color:var(--muted)}
+  .top-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .today{font-size:12.5px;color:var(--muted);text-align:right;line-height:1.3}
+  .today b{color:var(--ink);font-weight:700}
+  .bell{position:relative;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);cursor:pointer;font-size:17px}
+  .bell .dot{position:absolute;top:7px;right:8px;width:9px;height:9px;border-radius:50%;
+    background:var(--red);border:2px solid #0a0e1a}
+  .avatar{display:flex;align-items:center;gap:9px;cursor:pointer}
+  .avatar .pic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;
+    font-size:14px;color:#04122e;background:linear-gradient(120deg,#22d3ee,#60a5fa)}
+  .avatar .who{line-height:1.25}
+  .avatar .who .n{font-size:13px;font-weight:700}
+  .avatar .who .r{font-size:11px;color:var(--muted)}
+
+  .content{padding:24px 26px 48px;max-width:1180px;width:100%}
+  .page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  .page-head h1{font-size:25px;font-weight:800}
+  .page-head .sub{font-size:13.5px;color:var(--muted);margin-top:3px}
+  .ph-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+  .sec-title{display:flex;align-items:center;gap:10px;margin:26px 0 13px}
+  .sec-title h2{font-size:16px;font-weight:800}
+  .sec-title .line{flex:1;height:1px;background:rgba(36,49,84,.7)}
+  .sec-title a.more{font-size:12px;font-weight:700;color:var(--blue)}
+
+  /* KPI */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi{padding:18px 18px 16px;position:relative;overflow:hidden}
+  .kpi:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--c,var(--blue))}
+  .kpi .lbl{font-size:12.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:7px}
+  .kpi .lbl .ic{font-size:15px}
+  .kpi .val{font-size:30px;font-weight:900;letter-spacing:-1px;margin:8px 0 2px}
+  .kpi .val small{font-size:14px;font-weight:700;color:var(--muted);margin-left:3px}
+  .kpi .delta{font-size:12px;font-weight:700}
+  .kpi .delta.up{color:var(--green)} .kpi .delta.warn{color:var(--gold)} .kpi .delta.bad{color:var(--red)}
+  .c-blue{--c:var(--blue)} .c-red{--c:var(--red)} .c-gold{--c:var(--gold)} .c-violet{--c:var(--violet)} .c-green{--c:var(--green)}
+
+  /* two-col layouts */
+  .grid-2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px}
+  .grid-2b{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+  /* risk distribution */
+  .risk-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}
+  .risk-head h3{font-size:15px;font-weight:800}
+  .stack{height:30px;border-radius:9px;overflow:hidden;display:flex;border:1px solid var(--line)}
+  .stack span{display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;color:#04122e}
+  .stack .hi{background:linear-gradient(180deg,#fca5a5,#f87171)}
+  .stack .mid{background:linear-gradient(180deg,#fbd66e,#f5c451);color:#3a2c00}
+  .stack .lo{background:linear-gradient(180deg,#6ee7b7,#34d399)}
+  .legend{display:flex;gap:18px;margin-top:14px;flex-wrap:wrap}
+  .legend .it{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+  .legend .sw{width:11px;height:11px;border-radius:3px}
+  .legend b{color:var(--ink)}
+
+  /* gauge */
+  .gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .gauge{width:168px;height:168px;border-radius:50%;display:grid;place-items:center;position:relative;
+    background:conic-gradient(var(--green) 0 0deg,var(--gold) 0deg 259.2deg,var(--red) 259.2deg 360deg);
+    /* score 72/100 -> 259.2deg green portion handled below by overlay */}
+  .gauge{background:conic-gradient(
+      #34d399 0deg 187deg,
+      #f5c451 187deg 259deg,
+      #243154 259deg 360deg)}
+  .gauge:after{content:"";position:absolute;inset:16px;border-radius:50%;background:#101728;border:1px solid var(--line)}
+  .gauge .inner{position:relative;z-index:2;display:flex;flex-direction:column;gap:1px}
+  .gauge .score{font-size:38px;font-weight:900;letter-spacing:-1.5px}
+  .gauge .of{font-size:13px;color:var(--muted);font-weight:700;margin-top:-4px}
+  .gauge .grade{margin-top:5px;font-size:13px;font-weight:800;color:var(--gold)}
+  .gauge-note{font-size:12px;color:var(--muted);margin-top:14px;max-width:230px}
+
+  /* action checklist */
+  .chk-prog{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .chk-bar{flex:1;height:8px;background:#0e1730;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .chk-bar i{display:block;height:100%;width:40%;background:linear-gradient(90deg,#2563eb,#22d3ee)}
+  .chk-prog b{font-size:13px;font-weight:800}
+  .chk{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .chk li{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid var(--line);
+    border-radius:11px;background:rgba(255,255,255,.015);cursor:pointer;transition:.14s;font-size:13.5px}
+  .chk li:hover{border-color:#3a4d7a;background:rgba(255,255,255,.04)}
+  .chk .box{width:19px;height:19px;border-radius:6px;border:1.5px solid #3a4d7a;flex:none;
+    display:grid;place-items:center;font-size:12px;color:#04122e;transition:.14s}
+  .chk li.done .box{background:var(--green);border-color:var(--green)}
+  .chk li.done .txt{color:var(--muted);text-decoration:line-through}
+  .chk .txt{flex:1}
+  .chk .urg{font-size:9.5px;font-weight:900;color:var(--red);background:rgba(248,113,113,.16);
+    padding:2px 6px;border-radius:6px;letter-spacing:.5px}
+  .chk .due{font-size:11px;color:var(--muted);font-weight:600}
+
+  /* table */
+  .tbl-card{padding:0;overflow:hidden}
+  .tbl-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .tbl-top h3{font-size:15px;font-weight:800}
+  .tbl-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:680px}
+  thead th{font-size:11px;font-weight:800;letter-spacing:.4px;color:#6b7ca6;text-transform:uppercase;
+    text-align:left;padding:11px 16px;background:rgba(255,255,255,.02);border-bottom:1px solid var(--line)}
+  tbody td{padding:13px 16px;font-size:13.5px;border-bottom:1px solid rgba(36,49,84,.5);vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(255,255,255,.025)}
+  .nm-cell{display:flex;align-items:center;gap:10px}
+  .nm-cell .ini{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:12px;
+    font-weight:800;color:#04122e;background:linear-gradient(120deg,#60a5fa,#22d3ee)}
+  .nat{font-size:13px}
+  .dday{font-weight:800}
+  .dday.hot{color:var(--red)} .dday.mid{color:var(--gold)} .dday.cool{color:var(--green)}
+  .qual{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;font-weight:700;color:#cdd9f5}
+
+  /* ticket queue */
+  .tkt{display:flex;flex-direction:column;gap:10px}
+  .tkt .row{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);
+    border-radius:11px;background:rgba(255,255,255,.015)}
+  .tkt .id{font-family:ui-monospace,monospace;font-size:12px;font-weight:800;color:var(--blue);flex:none}
+  .tkt .meta{flex:1;min-width:0}
+  .tkt .meta .t{font-size:13.5px;font-weight:700}
+  .tkt .meta .w{font-size:11.5px;color:var(--muted);margin-top:1px}
+
+  /* alerts */
+  .alerts{display:flex;flex-direction:column;gap:10px}
+  .alert{display:flex;gap:12px;padding:12px 14px;border-radius:11px;border:1px solid var(--line);
+    background:rgba(255,255,255,.015);align-items:flex-start}
+  .alert .dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}
+  .alert .dot.r{background:var(--red);box-shadow:0 0 0 4px rgba(248,113,113,.16)}
+  .alert .dot.g{background:var(--gold);box-shadow:0 0 0 4px rgba(245,196,81,.16)}
+  .alert .dot.b{background:var(--blue);box-shadow:0 0 0 4px rgba(90,169,255,.16)}
+  .alert .bd{flex:1}
+  .alert .bd .t{font-size:13.5px;font-weight:700}
+  .alert .bd .d{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .alert .when{font-size:11px;color:#6b7ca6;font-weight:600;flex:none}
+  .progmini{height:6px;background:#0e1730;border:1px solid var(--line);border-radius:5px;overflow:hidden;margin-top:7px}
+  .progmini i{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#22d3ee)}
+
+  /* moneeback widget */
+  .mb{background:linear-gradient(135deg,rgba(245,196,81,.12),rgba(34,211,238,.07));
+    border:1px solid rgba(245,196,81,.28)}
+  .mb .top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .mb .top .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:20px;
+    background:rgba(245,196,81,.18);border:1px solid rgba(245,196,81,.3)}
+  .mb .top .h{font-size:14.5px;font-weight:800}
+  .mb .top .s{font-size:11px;color:var(--muted)}
+  .mb .figs{display:flex;gap:22px;margin:6px 0 14px;flex-wrap:wrap}
+  .mb .fig .n{font-size:22px;font-weight:900;letter-spacing:-.5px}
+  .mb .fig .n.gold{color:var(--gold)} .mb .fig .n.cyan{color:var(--cyan)}
+  .mb .fig .l{font-size:11px;color:var(--muted)}
+  .mb .est{font-size:11px;color:var(--muted);margin-top:2px}
+
+  .demo-note{font-size:11.5px;color:#6b7ca6;display:flex;align-items:center;gap:7px;margin-top:6px}
+
+  /* footer */
+  footer.ft{border-top:1px solid var(--line);margin-top:36px;padding:22px 26px 40px;color:var(--muted);font-size:12px;line-height:1.7}
+  footer.ft .links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+  footer.ft a{color:var(--blue)}
+  footer.ft .logo{font-weight:900;font-size:15px;color:var(--ink)}
+  footer.ft .logo span{color:var(--cyan)}
+
+  /* mobile backdrop */
+  .backdrop{display:none;position:fixed;inset:0;background:rgba(4,7,16,.6);z-index:40;backdrop-filter:blur(2px)}
+
+  @media(max-width:1080px){
+    .kpi-grid{grid-template-columns:repeat(2,1fr)}
+    .grid-3{grid-template-columns:1fr}
+  }
+  @media(max-width:900px){
+    .grid-2,.grid-2b{grid-template-columns:1fr}
+  }
+  @media(max-width:760px){
+    .app{grid-template-columns:1fr}
+    .side{position:fixed;left:0;top:0;bottom:0;width:280px;height:100%;z-index:50;transform:translateX(-100%);transition:transform .22s ease}
+    body.nav-open .side{transform:translateX(0)}
+    body.nav-open .backdrop{display:block}
+    .hamb{display:grid;place-items:center}
+    .kpi-grid{grid-template-columns:1fr}
+    .today{display:none}
+    .content{padding:18px 16px 40px}
+    .topbar{padding:12px 16px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side" id="side">
+    <div class="brand">
+      <div class="logo">PLUG<span>nx</span></div>
+      <div class="pill">VisaDesk</div>
+    </div>
+
+    <div class="nav-sec">관리</div>
+    <a class="nav-a active" href="#" onclick="return nav(this,'대시보드')"><span class="ico">▦</span> 대시보드</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'외국인 근로자')"><span class="ico">👥</span> 외국인 근로자 <span class="tag g">47</span></a>
+    <a class="nav-a" href="#" onclick="return nav(this,'비자/체류 점검')"><span class="ico">🛂</span> 비자/체류 점검 <span class="tag r">8</span></a>
+    <a class="nav-a" href="#" onclick="return nav(this,'서류')"><span class="ico">📄</span> 서류 <span class="tag g">12</span></a>
+    <a class="nav-a" href="#" onclick="return nav(this,'리스크 점수')"><span class="ico">📊</span> 리스크 점수</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'전문가 티켓')"><span class="ico">🎫</span> 전문가 티켓 <span class="tag g">3</span></a>
+    <a class="nav-a" href="#" onclick="return nav(this,'월간 리포트')"><span class="ico">🗂️</span> 월간 리포트</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'K-Trust')"><span class="ico">🛡️</span> K-Trust</a>
+
+    <div class="nav-sec">근로자 금융</div>
+    <a class="nav-a" href="moneeback.html"><span class="ico">💰</span> Moneeback 연계</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'급여 검증')"><span class="ico">🧮</span> 급여 검증 <span class="tag r">3</span></a>
+    <a class="nav-a" href="#" onclick="return nav(this,'출국 관리')"><span class="ico">✈️</span> 출국 관리</a>
+
+    <div class="nav-sec">사업 확장</div>
+    <a class="nav-a" href="#" onclick="return nav(this,'전문가 마켓')"><span class="ico">🤝</span> 전문가 마켓</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'사회통합교육')"><span class="ico">🎓</span> 사회통합교육</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'비자 쿼터')"><span class="ico">📈</span> 비자 쿼터</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'채용 파이프라인')"><span class="ico">🧲</span> 채용 파이프라인</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'금융 통합')"><span class="ico">🏦</span> 금융 통합</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'다사업장 관리')"><span class="ico">🏢</span> 다사업장 관리</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'알림/자동화')"><span class="ico">🔔</span> 알림/자동화</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'벤치마킹')"><span class="ico">📐</span> 벤치마킹</a>
+    <a class="nav-a" href="#" onclick="return nav(this,'청구/구독')"><span class="ico">🧾</span> 청구/구독</a>
+
+    <div class="side-foot">
+      <a href="visadesk.html">← VisaDesk 소개</a>
+      <a href="index.html">⌂ 산출물 허브</a>
+    </div>
+  </aside>
+
+  <div class="backdrop" onclick="closeNav()"></div>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- topbar -->
+    <header class="topbar">
+      <button class="hamb" onclick="openNav()" aria-label="메뉴">☰</button>
+      <div class="co">
+        <div class="nm">한성기공(주)</div>
+        <div class="sub">사업자 12*-**-***** · 제조 / 금속가공</div>
+      </div>
+      <div class="top-right">
+        <div class="today">2026년 6월 1일 <b>월요일</b><br/>관리자 모드 · KST</div>
+        <div class="bell" onclick="alert('알림 5건 — 데모 데이터입니다.')"><span>🔔</span><span class="dot"></span></div>
+        <div class="avatar" onclick="alert('계정: 김담당 / HR 매니저 — 데모')">
+          <div class="pic">김</div>
+          <div class="who"><div class="n">김담당</div><div class="r">HR 매니저</div></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <div class="page-head">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <h1>대시보드</h1>
+            <span class="badge local">● 데모 데이터</span>
+          </div>
+          <div class="sub">외국인 고용·체류·임금 준법 현황을 한눈에. 마지막 동기화 오늘 09:12</div>
+        </div>
+        <div class="ph-actions">
+          <button class="btn btn-ghost sm" onclick="alert('CSV 내보내기 — 데모')">⬇ 내보내기</button>
+          <button class="btn btn-primary sm" onclick="alert('월간 리포트 생성 — 데모')">＋ 월간 리포트 생성</button>
+        </div>
+      </div>
+
+      <!-- ===== KPI ===== -->
+      <div class="kpi-grid">
+        <div class="card kpi c-blue">
+          <div class="lbl"><span class="ic">👥</span> 총 외국인 근로자</div>
+          <div class="val">47<small>명</small></div>
+          <div class="delta up">▲ 이번 달 +3명</div>
+        </div>
+        <div class="card kpi c-red">
+          <div class="lbl"><span class="ic">⏳</span> 90일 내 체류만료</div>
+          <div class="val">8<small>명</small></div>
+          <div class="delta bad">● 즉시 검토 필요</div>
+        </div>
+        <div class="card kpi c-gold">
+          <div class="lbl"><span class="ic">⚖️</span> 임금요건 이슈</div>
+          <div class="val">3<small>명</small></div>
+          <div class="delta warn">미달 2 · 경고 1</div>
+        </div>
+        <div class="card kpi c-violet">
+          <div class="lbl"><span class="ic">📄</span> 서류 미비</div>
+          <div class="val">12<small>명</small></div>
+          <div class="delta warn">전체의 25.5%</div>
+        </div>
+      </div>
+
+      <!-- ===== Risk + Gauge ===== -->
+      <div class="sec-title"><h2>리스크 현황</h2><span class="line"></span><a class="more" href="#" onclick="return nav(null,'리스크 점수')">자세히 →</a></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="risk-head">
+            <h3>근로자 리스크 분포</h3>
+            <span class="muted" style="font-size:12.5px">총 47명</span>
+          </div>
+          <div class="stack">
+            <span class="hi" style="width:10.6%" title="고위험 5명">5</span>
+            <span class="mid" style="width:25.5%" title="중위험 12명">12</span>
+            <span class="lo" style="width:63.9%" title="저위험 30명">30</span>
+          </div>
+          <div class="legend">
+            <div class="it"><span class="sw" style="background:#f87171"></span>고위험 <b>5명</b></div>
+            <div class="it"><span class="sw" style="background:#f5c451"></span>중위험 <b>12명</b></div>
+            <div class="it"><span class="sw" style="background:#34d399"></span>저위험 <b>30명</b></div>
+          </div>
+          <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+            <span class="badge red">체류만료 임박 2</span>
+            <span class="badge gold">임금 경고 1</span>
+            <span class="badge blue">서류 보완 12</span>
+            <span class="badge green">자격외활동 0</span>
+          </div>
+        </div>
+
+        <div class="card gauge-wrap">
+          <div style="font-size:13px;font-weight:800;align-self:flex-start;margin-bottom:14px">회사 종합 리스크 점수</div>
+          <div class="gauge">
+            <div class="inner">
+              <div class="score">72</div>
+              <div class="of">/ 100</div>
+              <div class="grade">C 등급 · 주의</div>
+            </div>
+          </div>
+          <div class="gauge-note">고위험 근로자 5명과 임박 만료 8건이 점수를 끌어내림. 전문가 검토 완료 시 +8점 예상.</div>
+        </div>
+      </div>
+
+      <!-- ===== Action items + Alerts ===== -->
+      <div class="sec-title"><h2>이번 달 액션 아이템 · 긴급 알림</h2><span class="line"></span></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="chk-prog">
+            <b id="chkLabel">2 / 5 완료</b>
+            <div class="chk-bar"><i id="chkFill" style="width:40%"></i></div>
+          </div>
+          <ul class="chk" id="chkList">
+            <li onclick="toggle(this)">
+              <span class="box">✓</span><span class="urg">긴급</span>
+              <span class="txt">SANTOS A. 체류연장 서류 검토</span>
+            </li>
+            <li onclick="toggle(this)">
+              <span class="box">✓</span><span class="urg">긴급</span>
+              <span class="txt">E-7-3 임금요건 2명 검토</span>
+            </li>
+            <li onclick="toggle(this)">
+              <span class="box">✓</span>
+              <span class="txt">근로자 사업장변경 신고</span><span class="due">마감 6/5</span>
+            </li>
+            <li class="done" onclick="toggle(this)">
+              <span class="box">✓</span>
+              <span class="txt">4월 리포트 경영진 공유</span><span class="due">완료</span>
+            </li>
+            <li class="done" onclick="toggle(this)">
+              <span class="box">✓</span>
+              <span class="txt">신규 입사자 3명 서류 등록</span><span class="due">완료</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">
+            <h3 style="font-size:15px;font-weight:800">긴급 알림</h3>
+            <span class="badge red">4 NEW</span>
+          </div>
+          <div class="alerts">
+            <div class="alert">
+              <span class="dot r"></span>
+              <div class="bd"><div class="t">체류만료 임박 2명</div><div class="d">SANTOS A. (D-10) · NGUYEN T. (D-37) — 연장 절차 착수 필요</div></div>
+              <span class="when">방금</span>
+            </div>
+            <div class="alert">
+              <span class="dot g"></span>
+              <div class="bd"><div class="t">임금 경고 1명</div><div class="d">E-7-3 직군 1명 — 고시 기준 대비 경고 구간</div></div>
+              <span class="when">1시간 전</span>
+            </div>
+            <div class="alert">
+              <span class="dot b"></span>
+              <div class="bd"><div class="t">5월 월간 리포트 75% 완성</div><div class="d">경영진 공유까지 3개 항목 남음</div>
+                <div class="progmini"><i style="width:75%"></i></div>
+              </div>
+              <span class="when">오늘</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 체류만료 임박 테이블 ===== -->
+      <div class="sec-title"><h2>체류만료 임박 근로자</h2><span class="line"></span><a class="more" href="#" onclick="return nav(null,'비자/체류 점검')">전체 보기 →</a></div>
+      <div class="card tbl-card">
+        <div class="tbl-top">
+          <h3>만료일 60일 이내 우선 노출 · 이름 마스킹 적용</h3>
+          <span class="badge local">데모</span>
+        </div>
+        <div class="tbl-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>이름</th><th>국적</th><th>체류자격</th><th>만료일</th><th>남은일</th><th>위험도</th><th>상태</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="nm-cell"><span class="ini">SA</span> SANTOS A.</div></td>
+                <td class="nat">🇵🇭 필리핀</td><td class="qual">E-7-2</td><td>2026-06-05</td>
+                <td><span class="dday hot">D-10</span></td>
+                <td><span class="badge red">고위험</span></td>
+                <td><span class="muted">전문가 검토중</span></td>
+              </tr>
+              <tr>
+                <td><div class="nm-cell"><span class="ini">NT</span> NGUYEN T.</div></td>
+                <td class="nat">🇻🇳 베트남</td><td class="qual">E-9</td><td>2026-07-02</td>
+                <td><span class="dday mid">D-37</span></td>
+                <td><span class="badge gold">중위험</span></td>
+                <td><span class="muted">서류준비</span></td>
+              </tr>
+              <tr>
+                <td><div class="nm-cell"><span class="ini">PS</span> PRASAD S.</div></td>
+                <td class="nat">🇳🇵 네팔</td><td class="qual">E-9</td><td>2026-07-14</td>
+                <td><span class="dday mid">D-49</span></td>
+                <td><span class="badge gold">중위험</span></td>
+                <td><span class="muted">서류준비</span></td>
+              </tr>
+              <tr>
+                <td><div class="nm-cell"><span class="ini">RM</span> RAHMAN M.</div></td>
+                <td class="nat">🇧🇩 방글라데시</td><td class="qual">E-9</td><td>2026-07-20</td>
+                <td><span class="dday mid">D-55</span></td>
+                <td><span class="badge gold">중위험</span></td>
+                <td><span class="muted">정상</span></td>
+              </tr>
+              <tr>
+                <td><div class="nm-cell"><span class="ini">DT</span> DEWI T.</div></td>
+                <td class="nat">🇮🇩 인도네시아</td><td class="qual">E-9</td><td>2026-08-03</td>
+                <td><span class="dday cool">D-63</span></td>
+                <td><span class="badge green">저위험</span></td>
+                <td><span class="muted">정상</span></td>
+              </tr>
+              <tr>
+                <td><div class="nm-cell"><span class="ini">WL</span> WANG L.</div></td>
+                <td class="nat">🇨🇳 중국</td><td class="qual">F-4</td><td>2026-08-15</td>
+                <td><span class="dday cool">D-81</span></td>
+                <td><span class="badge green">저위험</span></td>
+                <td><span class="muted">정상</span></td>
+              </tr>
+              <tr>
+                <td><div class="nm-cell"><span class="ini">KT</span> KHIN T.</div></td>
+                <td class="nat">🇲🇲 미얀마</td><td class="qual">E-9</td><td>2026-08-28</td>
+                <td><span class="dday cool">D-94</span></td>
+                <td><span class="badge green">저위험</span></td>
+                <td><span class="muted">정상</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== Ticket queue + Moneeback ===== -->
+      <div class="grid-2" style="margin-top:16px">
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">
+            <h3 style="font-size:15px;font-weight:800">전문가 티켓 큐</h3>
+            <a class="more" style="font-size:12px;font-weight:700" href="#" onclick="return nav(null,'전문가 티켓')">티켓 보드 →</a>
+          </div>
+          <div class="tkt">
+            <div class="row">
+              <span class="id">TK-2026-001</span>
+              <div class="meta"><div class="t">체류연장 (SANTOS A.)</div><div class="w">담당 김행정사</div></div>
+              <span class="badge blue">진행중</span>
+            </div>
+            <div class="row">
+              <span class="id">TK-2026-002</span>
+              <div class="meta"><div class="t">임금검토 (E-7-3 2명)</div><div class="w">담당 박노무사</div></div>
+              <span class="badge gold">대기</span>
+            </div>
+            <div class="row">
+              <span class="id">TK-2026-003</span>
+              <div class="meta"><div class="t">사업장변경 신고</div><div class="w">담당 김행정사</div></div>
+              <span class="badge gold">대기</span>
+            </div>
+          </div>
+          <div class="demo-note">🤝 전문가 네트워크 행정사 3,360 · 변호사 365 연결 (데모)</div>
+        </div>
+
+        <div class="card mb">
+          <div class="top">
+            <div class="ic">💰</div>
+            <div><div class="h">Moneeback 연계 (근로자 금융)</div><div class="s">미수령 환급 자동 진단</div></div>
+          </div>
+          <div class="figs">
+            <div class="fig"><div class="n gold">약 1,050만원</div><div class="l">근로자 1인 평균 미수령 환급<span class="est"> · 추정치</span></div></div>
+            <div class="fig"><div class="n cyan">31<span style="font-size:13px">명</span></div><div class="l">47명 중 연계 가능</div></div>
+          </div>
+          <div class="muted" style="font-size:11.5px;margin-bottom:14px">
+            국민연금 반환일시금 약 520만 · 고용보험 약 180만 · 퇴직금 약 350만 합산 추정. 확정액은 국민연금공단·고용센터·보험사 조회로만 확인됩니다.
+          </div>
+          <a class="btn btn-ghost sm" href="moneeback.html">근로자용 Moneeback 보기 →</a>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+
+    <!-- ===== footer ===== -->
+    <footer class="ft">
+      <div class="links">
+        <a href="visadesk.html">← VisaDesk 소개</a>
+        <a href="index.html">⌂ 산출물 허브</a>
+        <a href="moneeback.html">Moneeback (근로자용)</a>
+      </div>
+      <div style="margin-bottom:7px">
+        <span class="logo">PLUG<span>nx</span></span> · VisaDesk 관리자 대시보드 — 외국인 고용·체류 준법관리 SaaS
+      </div>
+      본 화면은 데모 데이터로 구성된 미리보기입니다. 실제 비자·체류 판단은 참고용이며 행정사·노무사·변호사 검증과 관할 출입국·외국인청의 최종 판단이 필요합니다.<br/>
+      개인정보(외국인등록번호·여권번호·계좌 등)는 마스킹 처리되었습니다. © 2026 PlugNX Inc. · 내부 데모.
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // mobile nav
+  function openNav(){document.body.classList.add('nav-open')}
+  function closeNav(){document.body.classList.remove('nav-open')}
+
+  // sidebar active state + demo navigation
+  function nav(el, label){
+    if(el){
+      document.querySelectorAll('.nav-a').forEach(a=>a.classList.remove('active'));
+      el.classList.add('active');
+    }
+    closeNav();
+    if(label !== '대시보드'){
+      alert('「'+label+'」 화면은 데모에서 준비 중입니다. (VisaDesk 정식 버전 25개 페이지)');
+    }
+    return false;
+  }
+
+  // action checklist toggle
+  function toggle(li){
+    li.classList.toggle('done');
+    updateProgress();
+  }
+  function updateProgress(){
+    const items = document.querySelectorAll('#chkList li');
+    const done = document.querySelectorAll('#chkList li.done').length;
+    const pct = Math.round(done/items.length*100);
+    document.getElementById('chkFill').style.width = pct+'%';
+    document.getElementById('chkLabel').textContent = done+' / '+items.length+' 완료';
+  }
+  updateProgress();
+</script>
+</body>
+</html>

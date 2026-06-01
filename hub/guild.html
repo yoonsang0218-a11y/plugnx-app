@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>PlugNX 길드 — 외국인 신사업 파티</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/quiple/galmuri/dist/galmuri.css" />
+<style>
+  :root{--bg:#0b0f1a;--bg2:#121829;--panel:#1a2336;--panel2:#222d44;--ink:#e8eefc;--muted:#8b9bc4;
+    --gold:#f5c451;--gold2:#ffe08a;--blue:#5aa9ff;--green:#5be08a;--red:#ff6b6b;--violet:#b794f6;--cyan:#56d6d6;
+    --line:#2e3b59;--line2:#3d4d72;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Galmuri11','Galmuri9',monospace;background:radial-gradient(900px 500px at 50% -10%,rgba(90,169,255,0.12),transparent 60%),repeating-linear-gradient(0deg,#0b0f1a 0,#0b0f1a 2px,#0c1120 2px,#0c1120 4px);color:var(--ink);line-height:1.7;min-height:100vh;-webkit-font-smoothing:none;font-smooth:never}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+  .px{border:3px solid var(--line2);box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--line),4px 4px 0 5px rgba(0,0,0,.5)}
+  .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#0e1426,#0b0f1a);border-bottom:3px solid var(--line2)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:18px;text-shadow:2px 2px 0 #000}
+  .logo .gem{width:18px;height:18px;background:var(--gold);box-shadow:0 0 0 2px #000,inset -3px -3px 0 #b8860b;transform:rotate(45deg)}
+  .coins{color:var(--gold2);font-size:13px}.coins b{color:#fff}
+  .hero{text-align:center;padding:46px 0 26px}
+  .hero h1{font-size:30px;color:var(--gold);text-shadow:3px 3px 0 #000,0 0 18px rgba(245,196,81,.35);letter-spacing:1px;line-height:1.4}
+  .hero h1 .sub{display:block;font-size:13px;color:var(--blue);margin-top:8px;text-shadow:2px 2px 0 #000}
+  .hero p{color:var(--muted);font-size:13px;margin-top:14px;max-width:700px;margin-left:auto;margin-right:auto}
+  .dlg{display:inline-block;margin-top:18px;background:var(--panel);padding:14px 20px;color:var(--ink);font-size:12.5px;text-align:left;max-width:700px}
+  .dlg .npc{color:var(--gold);font-size:12px}.dlg .blink{color:var(--gold2);animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .group{margin:34px 0}
+  .group>.ghead{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+  .group .gtag{font-size:11px;color:#000;padding:3px 10px;box-shadow:2px 2px 0 #000}
+  .group .gname{font-size:15px;color:var(--ink);text-shadow:2px 2px 0 #000}
+  .group .gdesc{font-size:11px;color:var(--muted)}
+  .party{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:880px){.party{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.party{grid-template-columns:1fr}}
+  .char{background:linear-gradient(180deg,var(--panel),var(--panel2));padding:16px;position:relative;cursor:pointer;transition:transform .08s}
+  .char:hover{transform:translate(-2px,-2px)}
+  .char .lvl{position:absolute;top:-3px;right:-3px;background:var(--red);color:#fff;font-size:10px;padding:3px 7px;box-shadow:2px 2px 0 #000}
+  .char .portrait{width:64px;height:64px;display:grid;place-items:center;font-size:34px;background:var(--bg2);margin:0 auto 10px;border:3px solid var(--line2);box-shadow:inset -4px -4px 0 rgba(0,0,0,.4)}
+  .char .cname{text-align:center;font-size:14px;color:var(--gold2);text-shadow:2px 2px 0 #000}
+  .char .cclass{text-align:center;font-size:11px;margin-top:3px}
+  .char .ccode{text-align:center;font-size:9.5px;color:var(--muted);margin-top:2px;word-break:break-all}
+  .stats{margin:12px 0;display:flex;flex-direction:column;gap:5px}
+  .stat{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted)}
+  .stat .lab{width:34px;flex:none;text-align:right}
+  .bar{flex:1;height:9px;background:#0a0e18;border:2px solid #000;position:relative}
+  .bar i{display:block;height:100%}.bar .v{position:absolute;right:3px;top:-6px;font-size:9px;color:var(--ink)}
+  .skills{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;min-height:20px}
+  .skills span{font-size:9px;color:var(--cyan);background:#0e1830;border:1px solid var(--line2);padding:2px 5px}
+  .summon{display:block;width:100%;margin-top:12px;background:var(--gold);color:#000;border:none;font-family:inherit;font-size:12px;padding:9px;cursor:pointer;box-shadow:3px 3px 0 #000}
+  .summon:hover{background:var(--gold2)}.summon:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+  .ov{position:fixed;inset:0;background:rgba(2,4,10,.82);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+  .ov.on{display:flex}
+  .modal{background:linear-gradient(180deg,var(--panel),var(--panel2));max-width:560px;width:100%;padding:22px;max-height:88vh;overflow:auto}
+  .modal .mtop{display:flex;gap:14px;align-items:center;border-bottom:2px solid var(--line2);padding-bottom:14px;margin-bottom:14px}
+  .modal .mport{width:56px;height:56px;display:grid;place-items:center;font-size:30px;background:var(--bg2);border:3px solid var(--line2);flex:none}
+  .modal .mname{font-size:16px;color:var(--gold2);text-shadow:2px 2px 0 #000}
+  .modal .mclass{font-size:11px;margin-top:3px}
+  .modal h4{font-size:11px;color:var(--gold);margin:14px 0 7px;text-shadow:1px 1px 0 #000}
+  .modal p{font-size:12px;color:var(--ink)}
+  .modal .quest{background:#0e1830;border:2px solid var(--line2);padding:11px;font-size:11.5px;color:var(--muted);white-space:pre-wrap}
+  .cmd{background:#06080f;border:2px solid var(--line2);padding:11px;font-size:11px;color:var(--green);white-space:pre-wrap;word-break:break-all;margin-top:6px}
+  .copy{margin-top:8px;background:var(--blue);color:#000;border:none;font-family:inherit;font-size:11px;padding:7px 12px;cursor:pointer;box-shadow:2px 2px 0 #000}
+  .copy:active{transform:translate(2px,2px);box-shadow:0 0 0 #000}
+  .mclose{float:right;background:var(--red);color:#fff;border:none;font-family:inherit;font-size:11px;padding:6px 11px;cursor:pointer;box-shadow:2px 2px 0 #000}
+  footer{border-top:3px solid var(--line2);margin-top:40px;padding:24px 0 50px}
+  footer .note{background:var(--panel);padding:14px 18px;font-size:11px;color:var(--muted)}
+  footer .note b{color:var(--gold2)}footer code{color:var(--green)}footer a{color:var(--blue)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <div class="logo"><span class="gem"></span> PlugNX 길드</div>
+  <div class="coins">⛁ 길드원 <b>12</b> · 생성 <b>2026-06-01</b></div>
+</div></div>
+<div class="hero wrap">
+  <h1>⚔ PlugNX 외국인 신사업 길드 ⚔<span class="sub">— 체류외국인 278만, 빈 공간을 정벌하라 —</span></h1>
+  <p>각 길드원은 <b style="color:var(--gold2)">스킬(🎒)</b>과 <b style="color:var(--blue)">전담 에이전트(@)</b>를 함께 가진 캐릭터다. 카드/소환하기로 임무를 맡길 수 있다.</p>
+  <div class="dlg px">
+    <div class="npc">▶ 길드장</div>
+    "이 길드는 <b>.claude/skills · agents</b>에서 자라난다. 새 길드원이 필요하면 SKILL.md에 캐릭터 블록을 새겨라.<br>
+    원하는 길드원을 골라 <span class="blink">[소환하기]</span>를 누르면 부르는 법을 알려주마."
+  </div>
+</div>
+<div class="wrap" id="guild">
+  <div class="group">
+    <div class="ghead">
+      <span class="gtag" style="background:var(--gold)">1진</span>
+      <span class="gname">기능 파티 (라이프사이클)</span>
+      <span class="gdesc">— 리서치 → 타당성 → 전략 → GTM → 구현 진형</span>
+    </div>
+    <div class="party"><div class="char px" onclick='openM({&quot;name&quot;: &quot;전략 책사&quot;, &quot;emoji&quot;: &quot;🧠&quot;, &quot;class&quot;: &quot;길드마스터 · 策士&quot;, &quot;color&quot;: &quot;gold2&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;99&quot;, &quot;agent&quot;: &quot;newbiz-strategist&quot;, &quot;order&quot;: &quot;1&quot;, &quot;stats&quot;: &quot;지식=5, 속도=3, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;사업기획서, IR덱, TAM/SAM/SOM, 경쟁분석, 정책매핑&quot;, &quot;quest&quot;: &quot;사업기획서·IR 덱 작성, TAM 산정, 경쟁 분석, 이민정책 매핑, 투자자 Q&amp;A 대비.&quot;, &quot;example&quot;: &quot;이번 분기 IR 덱 초안 짜줘. TAM/SAM/SOM이랑 경쟁 해자 포함해서.&quot;, &quot;skill&quot;: &quot;newbiz-strategy&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;사업기획서&quot;, &quot;IR덱&quot;, &quot;TAM/SAM/SOM&quot;, &quot;경쟁분석&quot;, &quot;정책매핑&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.99</div>
+      <div class="portrait">🧠</div>
+      <div class="cname">전략 책사</div>
+      <div class="cclass" style="color:var(--gold2)">길드마스터 · 策士</div>
+      <div class="ccode">🎒 newbiz-strategy · @newbiz-strategist</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:100%;background:var(--blue)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:60%;background:var(--green)"></i><span class="v">3/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:100%;background:var(--violet)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>사업기획서</span><span>IR덱</span><span>TAM/SAM/SOM</span><span>경쟁분석</span><span>정책매핑</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;전략 책사&quot;, &quot;emoji&quot;: &quot;🧠&quot;, &quot;class&quot;: &quot;길드마스터 · 策士&quot;, &quot;color&quot;: &quot;gold2&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;99&quot;, &quot;agent&quot;: &quot;newbiz-strategist&quot;, &quot;order&quot;: &quot;1&quot;, &quot;stats&quot;: &quot;지식=5, 속도=3, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;사업기획서, IR덱, TAM/SAM/SOM, 경쟁분석, 정책매핑&quot;, &quot;quest&quot;: &quot;사업기획서·IR 덱 작성, TAM 산정, 경쟁 분석, 이민정책 매핑, 투자자 Q&amp;A 대비.&quot;, &quot;example&quot;: &quot;이번 분기 IR 덱 초안 짜줘. TAM/SAM/SOM이랑 경쟁 해자 포함해서.&quot;, &quot;skill&quot;: &quot;newbiz-strategy&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;사업기획서&quot;, &quot;IR덱&quot;, &quot;TAM/SAM/SOM&quot;, &quot;경쟁분석&quot;, &quot;정책매핑&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;시장 정찰병&quot;, &quot;emoji&quot;: &quot;🔭&quot;, &quot;class&quot;: &quot;척후 · 斥候&quot;, &quot;color&quot;: &quot;cyan&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;82&quot;, &quot;agent&quot;: &quot;market-researcher&quot;, &quot;order&quot;: &quot;2&quot;, &quot;stats&quot;: &quot;지식=5, 속도=4, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;시장규모, 경쟁지형, 고객여정, 정책스캔&quot;, &quot;quest&quot;: &quot;시장 규모 근거 수집, 경쟁 지형, 고객여정(30 터치포인트), 이민정책 변화 추적. 1차 출처 우선.&quot;, &quot;example&quot;: &quot;경쟁사 지형 다시 조사해줘. 환급·송금 쪽 플레이어 빠짐없이.&quot;, &quot;skill&quot;: &quot;market-research&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;시장규모&quot;, &quot;경쟁지형&quot;, &quot;고객여정&quot;, &quot;정책스캔&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.82</div>
+      <div class="portrait">🔭</div>
+      <div class="cname">시장 정찰병</div>
+      <div class="cclass" style="color:var(--cyan)">척후 · 斥候</div>
+      <div class="ccode">🎒 market-research · @market-researcher</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:100%;background:var(--blue)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:80%;background:var(--green)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:80%;background:var(--violet)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>시장규모</span><span>경쟁지형</span><span>고객여정</span><span>정책스캔</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;시장 정찰병&quot;, &quot;emoji&quot;: &quot;🔭&quot;, &quot;class&quot;: &quot;척후 · 斥候&quot;, &quot;color&quot;: &quot;cyan&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;82&quot;, &quot;agent&quot;: &quot;market-researcher&quot;, &quot;order&quot;: &quot;2&quot;, &quot;stats&quot;: &quot;지식=5, 속도=4, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;시장규모, 경쟁지형, 고객여정, 정책스캔&quot;, &quot;quest&quot;: &quot;시장 규모 근거 수집, 경쟁 지형, 고객여정(30 터치포인트), 이민정책 변화 추적. 1차 출처 우선.&quot;, &quot;example&quot;: &quot;경쟁사 지형 다시 조사해줘. 환급·송금 쪽 플레이어 빠짐없이.&quot;, &quot;skill&quot;: &quot;market-research&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;시장규모&quot;, &quot;경쟁지형&quot;, &quot;고객여정&quot;, &quot;정책스캔&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;타당성 감정사&quot;, &quot;emoji&quot;: &quot;⚖️&quot;, &quot;class&quot;: &quot;심판관 · 鑑定&quot;, &quot;color&quot;: &quot;violet&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;80&quot;, &quot;agent&quot;: &quot;feasibility-analyst&quot;, &quot;order&quot;: &quot;3&quot;, &quot;stats&quot;: &quot;지식=4, 속도=3, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;5축 타당성, SWOT, go/no-go, 리스크&quot;, &quot;quest&quot;: &quot;시장·제품·경쟁·재무·운영규제 5축 타당성 평가, 리스크 등록부, go/no-go, 타당성 보고서(HTML/PDF).&quot;, &quot;example&quot;: &quot;돌봄 버티컬 진입 타당성 5축으로 평가하고 go/no-go 내줘.&quot;, &quot;skill&quot;: &quot;feasibility-study&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;5축 타당성&quot;, &quot;SWOT&quot;, &quot;go/no-go&quot;, &quot;리스크&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.80</div>
+      <div class="portrait">⚖️</div>
+      <div class="cname">타당성 감정사</div>
+      <div class="cclass" style="color:var(--violet)">심판관 · 鑑定</div>
+      <div class="ccode">🎒 feasibility-study · @feasibility-analyst</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:80%;background:var(--blue)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:60%;background:var(--green)"></i><span class="v">3/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:100%;background:var(--violet)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>5축 타당성</span><span>SWOT</span><span>go/no-go</span><span>리스크</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;타당성 감정사&quot;, &quot;emoji&quot;: &quot;⚖️&quot;, &quot;class&quot;: &quot;심판관 · 鑑定&quot;, &quot;color&quot;: &quot;violet&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;80&quot;, &quot;agent&quot;: &quot;feasibility-analyst&quot;, &quot;order&quot;: &quot;3&quot;, &quot;stats&quot;: &quot;지식=4, 속도=3, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;5축 타당성, SWOT, go/no-go, 리스크&quot;, &quot;quest&quot;: &quot;시장·제품·경쟁·재무·운영규제 5축 타당성 평가, 리스크 등록부, go/no-go, 타당성 보고서(HTML/PDF).&quot;, &quot;example&quot;: &quot;돌봄 버티컬 진입 타당성 5축으로 평가하고 go/no-go 내줘.&quot;, &quot;skill&quot;: &quot;feasibility-study&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;5축 타당성&quot;, &quot;SWOT&quot;, &quot;go/no-go&quot;, &quot;리스크&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;진입 상단주&quot;, &quot;emoji&quot;: &quot;📣&quot;, &quot;class&quot;: &quot;상단장 · 商團長&quot;, &quot;color&quot;: &quot;green&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;78&quot;, &quot;agent&quot;: &quot;gtm-strategist&quot;, &quot;order&quot;: &quot;4&quot;, &quot;stats&quot;: &quot;지식=4, 속도=5, 심도=3, 신뢰=4&quot;, &quot;tags&quot;: &quot;ICP, 영업깔때기, 랜딩카피, PoC, 가격실험&quot;, &quot;quest&quot;: &quot;ICP·채널·영업 깔때기 설계, 랜딩/자가진단 카피, PoC 캠페인, 가격 실험, 파트너십.&quot;, &quot;example&quot;: &quot;요양시설 타깃 PoC 캠페인이랑 세미나 깔때기 설계해줘.&quot;, &quot;skill&quot;: &quot;gtm-playbook&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 5, &quot;심도&quot;: 3, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;ICP&quot;, &quot;영업깔때기&quot;, &quot;랜딩카피&quot;, &quot;PoC&quot;, &quot;가격실험&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.78</div>
+      <div class="portrait">📣</div>
+      <div class="cname">진입 상단주</div>
+      <div class="cclass" style="color:var(--green)">상단장 · 商團長</div>
+      <div class="ccode">🎒 gtm-playbook · @gtm-strategist</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:80%;background:var(--blue)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:100%;background:var(--green)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:60%;background:var(--violet)"></i><span class="v">3/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:80%;background:var(--gold)"></i><span class="v">4/5</span></span></div></div>
+      <div class="skills"><span>ICP</span><span>영업깔때기</span><span>랜딩카피</span><span>PoC</span><span>가격실험</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;진입 상단주&quot;, &quot;emoji&quot;: &quot;📣&quot;, &quot;class&quot;: &quot;상단장 · 商團長&quot;, &quot;color&quot;: &quot;green&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;78&quot;, &quot;agent&quot;: &quot;gtm-strategist&quot;, &quot;order&quot;: &quot;4&quot;, &quot;stats&quot;: &quot;지식=4, 속도=5, 심도=3, 신뢰=4&quot;, &quot;tags&quot;: &quot;ICP, 영업깔때기, 랜딩카피, PoC, 가격실험&quot;, &quot;quest&quot;: &quot;ICP·채널·영업 깔때기 설계, 랜딩/자가진단 카피, PoC 캠페인, 가격 실험, 파트너십.&quot;, &quot;example&quot;: &quot;요양시설 타깃 PoC 캠페인이랑 세미나 깔때기 설계해줘.&quot;, &quot;skill&quot;: &quot;gtm-playbook&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 5, &quot;심도&quot;: 3, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;ICP&quot;, &quot;영업깔때기&quot;, &quot;랜딩카피&quot;, &quot;PoC&quot;, &quot;가격실험&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;코드 대장장이&quot;, &quot;emoji&quot;: &quot;⚒️&quot;, &quot;class&quot;: &quot;장인 · 匠人&quot;, &quot;color&quot;: &quot;red&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;75&quot;, &quot;agent&quot;: &quot;tdd-engineer&quot;, &quot;order&quot;: &quot;5&quot;, &quot;stats&quot;: &quot;지식=4, 속도=4, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;TDD, 유닛테스트, API, 리팩터, E2E&quot;, &quot;quest&quot;: &quot;웹앱 기능 test-first 구현·리팩터(Next.js 15). Red→Green→Refactor. 버그 재현 테스트.&quot;, &quot;example&quot;: &quot;자가진단 recommend() 로직 유닛테스트 먼저 짜고 엣지케이스 보강해줘.&quot;, &quot;skill&quot;: &quot;tdd-engineering&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;TDD&quot;, &quot;유닛테스트&quot;, &quot;API&quot;, &quot;리팩터&quot;, &quot;E2E&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.75</div>
+      <div class="portrait">⚒️</div>
+      <div class="cname">코드 대장장이</div>
+      <div class="cclass" style="color:var(--red)">장인 · 匠人</div>
+      <div class="ccode">🎒 tdd-engineering · @tdd-engineer</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:80%;background:var(--blue)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:80%;background:var(--green)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:80%;background:var(--violet)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>TDD</span><span>유닛테스트</span><span>API</span><span>리팩터</span><span>E2E</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;코드 대장장이&quot;, &quot;emoji&quot;: &quot;⚒️&quot;, &quot;class&quot;: &quot;장인 · 匠人&quot;, &quot;color&quot;: &quot;red&quot;, &quot;group&quot;: &quot;기능 파티 (라이프사이클)&quot;, &quot;level&quot;: &quot;75&quot;, &quot;agent&quot;: &quot;tdd-engineer&quot;, &quot;order&quot;: &quot;5&quot;, &quot;stats&quot;: &quot;지식=4, 속도=4, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;TDD, 유닛테스트, API, 리팩터, E2E&quot;, &quot;quest&quot;: &quot;웹앱 기능 test-first 구현·리팩터(Next.js 15). Red→Green→Refactor. 버그 재현 테스트.&quot;, &quot;example&quot;: &quot;자가진단 recommend() 로직 유닛테스트 먼저 짜고 엣지케이스 보강해줘.&quot;, &quot;skill&quot;: &quot;tdd-engineering&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;TDD&quot;, &quot;유닛테스트&quot;, &quot;API&quot;, &quot;리팩터&quot;, &quot;E2E&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div></div>
+  </div>
+  <div class="group">
+    <div class="ghead">
+      <span class="gtag" style="background:var(--blue)">2진</span>
+      <span class="gname">도메인 코어</span>
+      <span class="gdesc">— 플랫폼을 떠받치는 본진 직업</span>
+    </div>
+    <div class="party"><div class="char px" onclick='openM({&quot;name&quot;: &quot;체류 수문장&quot;, &quot;emoji&quot;: &quot;🛡️&quot;, &quot;class&quot;: &quot;수문장 · 守門&quot;, &quot;color&quot;: &quot;blue&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;77&quot;, &quot;agent&quot;: &quot;visadesk-compliance-agent&quot;, &quot;order&quot;: &quot;1&quot;, &quot;stats&quot;: &quot;지식=5, 속도=3, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;비자만료, 서류체크, 쿼터·임금 준법, K-Trust&quot;, &quot;quest&quot;: &quot;기업 외국인 고용 준법(B2B VisaDesk) 일괄 점검, 알림 룰·데이터 모델 설계, 사업주 의무 점검.&quot;, &quot;example&quot;: &quot;이 사업장 외국인 30명 비자·임금요건 일괄 점검하고 리스크 리포트 만들어줘.&quot;, &quot;skill&quot;: &quot;visadesk-compliance&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 3, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;비자만료&quot;, &quot;서류체크&quot;, &quot;쿼터·임금 준법&quot;, &quot;K-Trust&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.77</div>
+      <div class="portrait">🛡️</div>
+      <div class="cname">체류 수문장</div>
+      <div class="cclass" style="color:var(--blue)">수문장 · 守門</div>
+      <div class="ccode">🎒 visadesk-compliance · @visadesk-compliance-agent</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:100%;background:var(--blue)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:60%;background:var(--green)"></i><span class="v">3/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:80%;background:var(--violet)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>비자만료</span><span>서류체크</span><span>쿼터·임금 준법</span><span>K-Trust</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;체류 수문장&quot;, &quot;emoji&quot;: &quot;🛡️&quot;, &quot;class&quot;: &quot;수문장 · 守門&quot;, &quot;color&quot;: &quot;blue&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;77&quot;, &quot;agent&quot;: &quot;visadesk-compliance-agent&quot;, &quot;order&quot;: &quot;1&quot;, &quot;stats&quot;: &quot;지식=5, 속도=3, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;비자만료, 서류체크, 쿼터·임금 준법, K-Trust&quot;, &quot;quest&quot;: &quot;기업 외국인 고용 준법(B2B VisaDesk) 일괄 점검, 알림 룰·데이터 모델 설계, 사업주 의무 점검.&quot;, &quot;example&quot;: &quot;이 사업장 외국인 30명 비자·임금요건 일괄 점검하고 리스크 리포트 만들어줘.&quot;, &quot;skill&quot;: &quot;visadesk-compliance&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 3, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;비자만료&quot;, &quot;서류체크&quot;, &quot;쿼터·임금 준법&quot;, &quot;K-Trust&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;환급 연금술사&quot;, &quot;emoji&quot;: &quot;💰&quot;, &quot;class&quot;: &quot;연금술사 · 鍊金&quot;, &quot;color&quot;: &quot;gold2&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;76&quot;, &quot;agent&quot;: &quot;moneeback-refund-agent&quot;, &quot;order&quot;: &quot;2&quot;, &quot;stats&quot;: &quot;지식=5, 속도=3, 심도=5, 신뢰=4&quot;, &quot;tags&quot;: &quot;국민연금 반환, 퇴직금, 출국만기보험, 급여적정성&quot;, &quot;quest&quot;: &quot;미수령 환급(연금·퇴직금·보험) 추정, 국가별 사회보장협정 분석, 환급 계산기 로직. 결과는 추정치.&quot;, &quot;example&quot;: &quot;베트남 E-9 5년차 출국 시 받을 환급 총액 항목별로 추정해줘.&quot;, &quot;skill&quot;: &quot;moneeback-refund&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;국민연금 반환&quot;, &quot;퇴직금&quot;, &quot;출국만기보험&quot;, &quot;급여적정성&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.76</div>
+      <div class="portrait">💰</div>
+      <div class="cname">환급 연금술사</div>
+      <div class="cclass" style="color:var(--gold2)">연금술사 · 鍊金</div>
+      <div class="ccode">🎒 moneeback-refund · @moneeback-refund-agent</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:100%;background:var(--blue)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:60%;background:var(--green)"></i><span class="v">3/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:100%;background:var(--violet)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:80%;background:var(--gold)"></i><span class="v">4/5</span></span></div></div>
+      <div class="skills"><span>국민연금 반환</span><span>퇴직금</span><span>출국만기보험</span><span>급여적정성</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;환급 연금술사&quot;, &quot;emoji&quot;: &quot;💰&quot;, &quot;class&quot;: &quot;연금술사 · 鍊金&quot;, &quot;color&quot;: &quot;gold2&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;76&quot;, &quot;agent&quot;: &quot;moneeback-refund-agent&quot;, &quot;order&quot;: &quot;2&quot;, &quot;stats&quot;: &quot;지식=5, 속도=3, 심도=5, 신뢰=4&quot;, &quot;tags&quot;: &quot;국민연금 반환, 퇴직금, 출국만기보험, 급여적정성&quot;, &quot;quest&quot;: &quot;미수령 환급(연금·퇴직금·보험) 추정, 국가별 사회보장협정 분석, 환급 계산기 로직. 결과는 추정치.&quot;, &quot;example&quot;: &quot;베트남 E-9 5년차 출국 시 받을 환급 총액 항목별로 추정해줘.&quot;, &quot;skill&quot;: &quot;moneeback-refund&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;국민연금 반환&quot;, &quot;퇴직금&quot;, &quot;출국만기보험&quot;, &quot;급여적정성&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;비자 현자&quot;, &quot;emoji&quot;: &quot;📜&quot;, &quot;class&quot;: &quot;현자 · 賢者&quot;, &quot;color&quot;: &quot;violet&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;88&quot;, &quot;agent&quot;: &quot;foreign-domain-expert&quot;, &quot;order&quot;: &quot;3&quot;, &quot;stats&quot;: &quot;지식=5, 속도=4, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;비자종류, 체류자격, 노동법, 환급제도&quot;, &quot;quest&quot;: &quot;비자 종류별 요건, 체류자격 변경 경로, 고용허가제, 사회보장협정국 등 도메인 사실 1차 출처 검증.&quot;, &quot;example&quot;: &quot;E-9에서 E-7-4 숙련기능 전환 요건과 경로 정리해줘. 1차 출처로.&quot;, &quot;skill&quot;: &quot;foreign-visa-kb&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 4, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;비자종류&quot;, &quot;체류자격&quot;, &quot;노동법&quot;, &quot;환급제도&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.88</div>
+      <div class="portrait">📜</div>
+      <div class="cname">비자 현자</div>
+      <div class="cclass" style="color:var(--violet)">현자 · 賢者</div>
+      <div class="ccode">🎒 foreign-visa-kb · @foreign-domain-expert</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:100%;background:var(--blue)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:80%;background:var(--green)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:100%;background:var(--violet)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>비자종류</span><span>체류자격</span><span>노동법</span><span>환급제도</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;비자 현자&quot;, &quot;emoji&quot;: &quot;📜&quot;, &quot;class&quot;: &quot;현자 · 賢者&quot;, &quot;color&quot;: &quot;violet&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;88&quot;, &quot;agent&quot;: &quot;foreign-domain-expert&quot;, &quot;order&quot;: &quot;3&quot;, &quot;stats&quot;: &quot;지식=5, 속도=4, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;비자종류, 체류자격, 노동법, 환급제도&quot;, &quot;quest&quot;: &quot;비자 종류별 요건, 체류자격 변경 경로, 고용허가제, 사회보장협정국 등 도메인 사실 1차 출처 검증.&quot;, &quot;example&quot;: &quot;E-9에서 E-7-4 숙련기능 전환 요건과 경로 정리해줘. 1차 출처로.&quot;, &quot;skill&quot;: &quot;foreign-visa-kb&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 5, &quot;속도&quot;: 4, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;비자종류&quot;, &quot;체류자격&quot;, &quot;노동법&quot;, &quot;환급제도&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;인증 봉인술사&quot;, &quot;emoji&quot;: &quot;🔐&quot;, &quot;class&quot;: &quot;봉인술사 · 印&quot;, &quot;color&quot;: &quot;cyan&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;74&quot;, &quot;agent&quot;: &quot;foreignid-auth-agent&quot;, &quot;order&quot;: &quot;4&quot;, &quot;stats&quot;: &quot;지식=4, 속도=3, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;3단계 인증, 여권OCR, KYC/AML, 전자서명&quot;, &quot;quest&quot;: &quot;ForeignID 인증 레벨(L0~L3) 설계, 여권·외국인등록증 OCR/진위, KYC/AML·보안·개인정보 검토.&quot;, &quot;example&quot;: &quot;외국인 대출 기능에 필요한 인증 레벨이랑 KYC 흐름 설계해줘.&quot;, &quot;skill&quot;: &quot;foreignid-auth&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;3단계 인증&quot;, &quot;여권OCR&quot;, &quot;KYC/AML&quot;, &quot;전자서명&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.74</div>
+      <div class="portrait">🔐</div>
+      <div class="cname">인증 봉인술사</div>
+      <div class="cclass" style="color:var(--cyan)">봉인술사 · 印</div>
+      <div class="ccode">🎒 foreignid-auth · @foreignid-auth-agent</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:80%;background:var(--blue)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:60%;background:var(--green)"></i><span class="v">3/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:100%;background:var(--violet)"></i><span class="v">5/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>3단계 인증</span><span>여권OCR</span><span>KYC/AML</span><span>전자서명</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;인증 봉인술사&quot;, &quot;emoji&quot;: &quot;🔐&quot;, &quot;class&quot;: &quot;봉인술사 · 印&quot;, &quot;color&quot;: &quot;cyan&quot;, &quot;group&quot;: &quot;도메인 코어&quot;, &quot;level&quot;: &quot;74&quot;, &quot;agent&quot;: &quot;foreignid-auth-agent&quot;, &quot;order&quot;: &quot;4&quot;, &quot;stats&quot;: &quot;지식=4, 속도=3, 심도=5, 신뢰=5&quot;, &quot;tags&quot;: &quot;3단계 인증, 여권OCR, KYC/AML, 전자서명&quot;, &quot;quest&quot;: &quot;ForeignID 인증 레벨(L0~L3) 설계, 여권·외국인등록증 OCR/진위, KYC/AML·보안·개인정보 검토.&quot;, &quot;example&quot;: &quot;외국인 대출 기능에 필요한 인증 레벨이랑 KYC 흐름 설계해줘.&quot;, &quot;skill&quot;: &quot;foreignid-auth&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 3, &quot;심도&quot;: 5, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;3단계 인증&quot;, &quot;여권OCR&quot;, &quot;KYC/AML&quot;, &quot;전자서명&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div></div>
+  </div>
+  <div class="group">
+    <div class="ghead">
+      <span class="gtag" style="background:var(--green)">3진</span>
+      <span class="gname">확장 시장 부대</span>
+      <span class="gdesc">— 정책 8대 신시장의 확장 영역</span>
+    </div>
+    <div class="party"><div class="char px" onclick='openM({&quot;name&quot;: &quot;돌봄 치유사&quot;, &quot;emoji&quot;: &quot;❤️‍🩹&quot;, &quot;class&quot;: &quot;치유사 · 治癒&quot;, &quot;color&quot;: &quot;red&quot;, &quot;group&quot;: &quot;확장 시장 부대&quot;, &quot;level&quot;: &quot;70&quot;, &quot;agent&quot;: &quot;care-service-agent&quot;, &quot;order&quot;: &quot;1&quot;, &quot;stats&quot;: &quot;지식=4, 속도=3, 심도=4, 신뢰=4&quot;, &quot;tags&quot;: &quot;요양보호사 E-7-2, 가사관리사, 돌봄비자&quot;, &quot;quest&quot;: &quot;외국인 돌봄·간병·가사 인력 비자·자격·교육·제도 조사. 신설·변동 잦아 최신 1차 출처 필수.&quot;, &quot;example&quot;: &quot;외국인 요양보호사(E-7-2) 취득 요건이랑 가사관리사 시범사업 현황 정리해줘.&quot;, &quot;skill&quot;: &quot;care-service&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 3, &quot;심도&quot;: 4, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;요양보호사 E-7-2&quot;, &quot;가사관리사&quot;, &quot;돌봄비자&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.70</div>
+      <div class="portrait">❤️‍🩹</div>
+      <div class="cname">돌봄 치유사</div>
+      <div class="cclass" style="color:var(--red)">치유사 · 治癒</div>
+      <div class="ccode">🎒 care-service · @care-service-agent</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:80%;background:var(--blue)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:60%;background:var(--green)"></i><span class="v">3/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:80%;background:var(--violet)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:80%;background:var(--gold)"></i><span class="v">4/5</span></span></div></div>
+      <div class="skills"><span>요양보호사 E-7-2</span><span>가사관리사</span><span>돌봄비자</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;돌봄 치유사&quot;, &quot;emoji&quot;: &quot;❤️‍🩹&quot;, &quot;class&quot;: &quot;치유사 · 治癒&quot;, &quot;color&quot;: &quot;red&quot;, &quot;group&quot;: &quot;확장 시장 부대&quot;, &quot;level&quot;: &quot;70&quot;, &quot;agent&quot;: &quot;care-service-agent&quot;, &quot;order&quot;: &quot;1&quot;, &quot;stats&quot;: &quot;지식=4, 속도=3, 심도=4, 신뢰=4&quot;, &quot;tags&quot;: &quot;요양보호사 E-7-2, 가사관리사, 돌봄비자&quot;, &quot;quest&quot;: &quot;외국인 돌봄·간병·가사 인력 비자·자격·교육·제도 조사. 신설·변동 잦아 최신 1차 출처 필수.&quot;, &quot;example&quot;: &quot;외국인 요양보호사(E-7-2) 취득 요건이랑 가사관리사 시범사업 현황 정리해줘.&quot;, &quot;skill&quot;: &quot;care-service&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 3, &quot;심도&quot;: 4, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;요양보호사 E-7-2&quot;, &quot;가사관리사&quot;, &quot;돌봄비자&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;인재 모병관&quot;, &quot;emoji&quot;: &quot;🤝&quot;, &quot;class&quot;: &quot;모병관 · 募兵&quot;, &quot;color&quot;: &quot;gold2&quot;, &quot;group&quot;: &quot;확장 시장 부대&quot;, &quot;level&quot;: &quot;71&quot;, &quot;agent&quot;: &quot;recruit-matching-agent&quot;, &quot;order&quot;: &quot;2&quot;, &quot;stats&quot;: &quot;지식=4, 속도=4, 심도=4, 신뢰=4&quot;, &quot;tags&quot;: &quot;구인구직 매칭, 비자 적합성, 자격변경, EPS&quot;, &quot;quest&quot;: &quot;기업 구인↔구직자 매칭, 직무별 채용 가능 비자 매핑, 자격변경 취업 경로, 고용허가제 연계.&quot;, &quot;example&quot;: &quot;이 직무들에 우리가 가진 후보 비자로 합법 채용 가능한지 일괄 매칭해줘.&quot;, &quot;skill&quot;: &quot;recruit-matching&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;구인구직 매칭&quot;, &quot;비자 적합성&quot;, &quot;자격변경&quot;, &quot;EPS&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.71</div>
+      <div class="portrait">🤝</div>
+      <div class="cname">인재 모병관</div>
+      <div class="cclass" style="color:var(--gold2)">모병관 · 募兵</div>
+      <div class="ccode">🎒 recruit-matching · @recruit-matching-agent</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:80%;background:var(--blue)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:80%;background:var(--green)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:80%;background:var(--violet)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:80%;background:var(--gold)"></i><span class="v">4/5</span></span></div></div>
+      <div class="skills"><span>구인구직 매칭</span><span>비자 적합성</span><span>자격변경</span><span>EPS</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;인재 모병관&quot;, &quot;emoji&quot;: &quot;🤝&quot;, &quot;class&quot;: &quot;모병관 · 募兵&quot;, &quot;color&quot;: &quot;gold2&quot;, &quot;group&quot;: &quot;확장 시장 부대&quot;, &quot;level&quot;: &quot;71&quot;, &quot;agent&quot;: &quot;recruit-matching-agent&quot;, &quot;order&quot;: &quot;2&quot;, &quot;stats&quot;: &quot;지식=4, 속도=4, 심도=4, 신뢰=4&quot;, &quot;tags&quot;: &quot;구인구직 매칭, 비자 적합성, 자격변경, EPS&quot;, &quot;quest&quot;: &quot;기업 구인↔구직자 매칭, 직무별 채용 가능 비자 매핑, 자격변경 취업 경로, 고용허가제 연계.&quot;, &quot;example&quot;: &quot;이 직무들에 우리가 가진 후보 비자로 합법 채용 가능한지 일괄 매칭해줘.&quot;, &quot;skill&quot;: &quot;recruit-matching&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 4}, &quot;taglist&quot;: [&quot;구인구직 매칭&quot;, &quot;비자 적합성&quot;, &quot;자격변경&quot;, &quot;EPS&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div><div class="char px" onclick='openM({&quot;name&quot;: &quot;통합 교사&quot;, &quot;emoji&quot;: &quot;🗣️&quot;, &quot;class&quot;: &quot;교사 · 敎師&quot;, &quot;color&quot;: &quot;cyan&quot;, &quot;group&quot;: &quot;확장 시장 부대&quot;, &quot;level&quot;: &quot;69&quot;, &quot;agent&quot;: &quot;social-integration-agent&quot;, &quot;order&quot;: &quot;3&quot;, &quot;stats&quot;: &quot;지식=4, 속도=4, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;KIIP, 사회통합, 한국어, 영주·귀화 연계&quot;, &quot;quest&quot;: &quot;사회통합프로그램(KIIP) 단계·이수시간·평가·면제, 영주/귀화 연계 혜택, VisaDesk 정착단계 연계.&quot;, &quot;example&quot;: &quot;KIIP 단계별 이수시간이랑 영주 신청 시 혜택 정리하고 정착단계에 매핑해줘.&quot;, &quot;skill&quot;: &quot;social-integration&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;KIIP&quot;, &quot;사회통합&quot;, &quot;한국어&quot;, &quot;영주·귀화 연계&quot;], &quot;agent_exists&quot;: true})'>
+      <div class="lvl">Lv.69</div>
+      <div class="portrait">🗣️</div>
+      <div class="cname">통합 교사</div>
+      <div class="cclass" style="color:var(--cyan)">교사 · 敎師</div>
+      <div class="ccode">🎒 social-integration · @social-integration-agent</div>
+      <div class="stats"><div class="stat"><span class="lab">지식</span><span class="bar"><i style="width:80%;background:var(--blue)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">속도</span><span class="bar"><i style="width:80%;background:var(--green)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">심도</span><span class="bar"><i style="width:80%;background:var(--violet)"></i><span class="v">4/5</span></span></div><div class="stat"><span class="lab">신뢰</span><span class="bar"><i style="width:100%;background:var(--gold)"></i><span class="v">5/5</span></span></div></div>
+      <div class="skills"><span>KIIP</span><span>사회통합</span><span>한국어</span><span>영주·귀화 연계</span></div>
+      <button class="summon" onclick='event.stopPropagation();openM({&quot;name&quot;: &quot;통합 교사&quot;, &quot;emoji&quot;: &quot;🗣️&quot;, &quot;class&quot;: &quot;교사 · 敎師&quot;, &quot;color&quot;: &quot;cyan&quot;, &quot;group&quot;: &quot;확장 시장 부대&quot;, &quot;level&quot;: &quot;69&quot;, &quot;agent&quot;: &quot;social-integration-agent&quot;, &quot;order&quot;: &quot;3&quot;, &quot;stats&quot;: &quot;지식=4, 속도=4, 심도=4, 신뢰=5&quot;, &quot;tags&quot;: &quot;KIIP, 사회통합, 한국어, 영주·귀화 연계&quot;, &quot;quest&quot;: &quot;사회통합프로그램(KIIP) 단계·이수시간·평가·면제, 영주/귀화 연계 혜택, VisaDesk 정착단계 연계.&quot;, &quot;example&quot;: &quot;KIIP 단계별 이수시간이랑 영주 신청 시 혜택 정리하고 정착단계에 매핑해줘.&quot;, &quot;skill&quot;: &quot;social-integration&quot;, &quot;statmap&quot;: {&quot;지식&quot;: 4, &quot;속도&quot;: 4, &quot;심도&quot;: 4, &quot;신뢰&quot;: 5}, &quot;taglist&quot;: [&quot;KIIP&quot;, &quot;사회통합&quot;, &quot;한국어&quot;, &quot;영주·귀화 연계&quot;], &quot;agent_exists&quot;: true})'>⚔ 소환하기</button>
+    </div></div>
+  </div></div>
+<footer><div class="wrap"><div class="note">
+  ※ 이 길드원들은 <b>C:\Users\admin\plugnx-foreignbiz</b> 워크스페이스의 <b>스킬+서브에이전트</b>다.
+  캐릭터 정보는 각 <code>.claude/skills/&lt;스킬&gt;/SKILL.md</code> 안의 <code>&lt;!-- guild:character --&gt;</code> 블록에 산다(스킬 발동엔 영향 없는 주석).<br>
+  <b>새 길드원 추가:</b> ① 새 SKILL.md에 guild:character 블록 작성 (+ 짝 에이전트) → ② <code>python tools/build_guild.py</code> 실행 → 이 페이지에 자동 등장.<br>
+  저장소: <a href="https://github.com/yoonsang0218-a11y/plugnx-foreignbiz" target="_blank">github.com/yoonsang0218-a11y/plugnx-foreignbiz</a>
+</div></div></footer>
+<div class="ov" id="ov" onclick="if(event.target===this)closeM()"><div class="modal px" id="modal"></div></div>
+<script>
+function openM(m){
+  const ex = m.example || "";
+  const cmd = "# 1) 워크스페이스에서 Claude Code 열기\ncd C:\\Users\\admin\\plugnx-foreignbiz\n\n# 2) 임무 요청(자동 위임) 또는 직접 지정\n\""+ex+"\"\n# 또는: \"이 작업을 "+(m.agent||"")+" 에게 맡겨줘\"";
+  document.getElementById("modal").innerHTML =
+    '<button class="mclose" onclick="closeM()">✕ 닫기</button>'+
+    '<div class="mtop"><div class="mport">'+(m.emoji||"❔")+'</div><div>'+
+      '<div class="mname">'+(m.name||"")+' <span style="font-size:11px;color:var(--muted)">Lv.'+(m.level||"?")+'</span></div>'+
+      '<div class="mclass">'+(m.class||"")+'</div>'+
+      '<div style="font-size:10px;color:var(--muted);margin-top:3px">🎒 스킬: '+(m.skill||"")+' · 에이전트: @'+(m.agent||"")+'</div>'+
+    '</div></div>'+
+    '<h4>▶ 담당 임무</h4><p>'+(m.quest||"")+'</p>'+
+    '<h4>▶ 소환 방법</h4><p style="font-size:11px;color:var(--muted)">아래를 복사해 워크스페이스의 Claude Code에 붙여넣으면 이 길드원이 발동/위임됩니다.</p>'+
+    '<div class="cmd">'+cmd.replace(/</g,"&lt;")+'</div>'+
+    '<button class="copy" onclick="copyCmd()">📋 명령 복사</button>'+
+    '<h4 style="margin-top:16px">▶ 예시 퀘스트</h4><div class="quest">'+ex+'</div>';
+  window._cmd = cmd;
+  document.getElementById("ov").classList.add("on");
+}
+function closeM(){document.getElementById("ov").classList.remove("on");}
+function copyCmd(){navigator.clipboard.writeText(window._cmd||"").then(()=>{const b=event.target,t=b.textContent;b.textContent="✓ 복사됨!";setTimeout(()=>b.textContent=t,1200);});}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
+</script>
+</body>
+</html>
