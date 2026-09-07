@@ -1,29 +1,49 @@
-# PlugNX LifeMap Interactive Prototype
+# PlugNX LifeMap · Life Event OS Prototype
 
-Static public prototype for the foreign-resident Life Asset journey:
+Public static prototype for foreign residents in Korea.
 
-`Job → Home → Move → Storage → Mobility → Finance → Asset`
+The product is intentionally **not** a category-based super app. Users start from a life event and LifeMap reveals only the next decisions and execution modules that are relevant.
 
-## Included interactions
-- Full map with six togglable layers
-- Company / housing / community / moving-service entity cards
-- Structured Promise→Outcome reviews with evidence levels
-- One-time user profile and localStorage persistence
-- URL/text quick import demo for future crawling/partner ingestion
-- Job + home monthly-surplus comparison
-- Move-gap and storage/temporary-stay signal
-- Transit vs used-car mobility scenario
-- Guarantee / credit / auto / mortgage readiness as precheck only
+## Primary journeys
+- Change job
+- Move home
+- Commute is difficult
+- About to sign a housing contract
+- Settle in Korea long-term
+- Leave Korea
 
-## Run tests
+## Product layers
+- **Discovery:** map, company/housing/place search, entity detail
+- **Decision:** Next Best Action and event timeline
+- **Execution:** moving, storage, temporary stay, cleaning, used-car partner handoff
+- **Trust:** WorkProof, HomeSafe, Promise→Outcome reviews
+- **Finance:** guarantee/credit/auto/mortgage readiness only; never final approval
+
+## Conditional orchestration examples
+- Move-out before move-in → storage + temporary stay appear.
+- No move gap → storage and temporary stay remain hidden.
+- HomeSafe/risk is weak → verification is prioritized before finance.
+- Car does not improve the commute within budget → used-car options remain hidden.
+- Long-term settlement → mortgage, valuation and electronic registration are surfaced as later-stage rails.
+
+## Existing prototype capabilities retained
+- One-time user profile stored locally
+- Company/housing reviews with evidence levels
+- URL/text quick-import demo for future crawling/partner ingestion
+- Company + home monthly surplus and commute comparison
+- Map layer controls under Advanced Explore
+
+## Tests
 
 ```bash
 node --test lifemap/tests/*.test.mjs
 node --check lifemap/app.js
+node --check lifemap/core.mjs
+node --check lifemap/data.mjs
 ```
 
 ## Production integration boundary
-Replace demo data using provider adapters rather than embedding API logic into the UI:
+Replace demo data through provider adapters instead of embedding source-specific logic in the UI:
 `JobSourceAdapter`, `PropertyContextProvider`, `ReviewProvider`, `MoveProvider`, `MobilityProvider`, `FinanceEligibilityProvider`.
 
 All company, housing, partner, vehicle and financial values in this prototype are fictional/demo unless explicitly marked otherwise.
