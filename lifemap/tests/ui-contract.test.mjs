@@ -4,7 +4,18 @@ import { readFile } from 'node:fs/promises';
 
 const path = new URL('../index.html', import.meta.url);
 
-test('LifeMap shell exposes all life-event layers and primary actions', async () => {
+test('LifeMap primary shell is life-event led rather than category led', async () => {
+  const html = await readFile(path, 'utf8');
+  for (const token of [
+    'id="event-chooser"',
+    'id="next-action-card"',
+    'id="event-timeline"',
+    'id="execution-panel"',
+    'id="advanced-map-controls"',
+  ]) assert.ok(html.includes(token), `missing ${token}`);
+});
+
+test('LifeMap keeps discovery, profile, import and evidence-backed review flows', async () => {
   const html = await readFile(path, 'utf8');
   for (const token of [
     'data-layer="jobs"',
