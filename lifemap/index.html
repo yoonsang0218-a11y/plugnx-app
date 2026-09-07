@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="description" content="PlugNX LifeMap interactive prototype for foreign residents in Korea." />
-  <title>PlugNX LifeMap · Work Home Move Finance</title>
+  <meta name="description" content="PlugNX LifeMap - foreign resident life-event orchestration prototype." />
+  <title>PlugNX LifeMap · Life Event OS</title>
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
@@ -14,7 +14,7 @@
   <header class="topbar">
     <div class="brand-wrap">
       <div class="brand-mark">P</div>
-      <div><div class="brand">PlugNX <strong>LifeMap</strong></div><div class="subbrand">Work · Home · Move · Mobility · Finance</div></div>
+      <div><div class="brand">PlugNX <strong>LifeMap</strong></div><div class="subbrand">Life Event OS · Korea</div></div>
       <span class="demo-badge">DEMO DATA</span>
     </div>
     <div class="top-actions">
@@ -24,23 +24,35 @@
     </div>
   </header>
 
+  <section class="event-bar" aria-label="Life Event 선택">
+    <div class="event-copy"><span class="eyebrow">WHAT ARE YOU TRYING TO DO?</span><strong>지금 준비하는 일을 선택하세요.</strong><p>서비스를 고르는 대신 상황을 고르면, 필요한 행동만 순서대로 보여드립니다.</p></div>
+    <div class="event-chooser" id="event-chooser"></div>
+  </section>
+
   <main class="app-shell">
     <section class="map-shell" aria-label="LifeMap 지도">
       <div id="map"></div>
-      <div class="map-fallback" id="map-fallback"><div class="fallback-grid"></div><div class="fallback-message">지도 타일을 불러오지 못했습니다. 목록·비교 기능은 그대로 사용할 수 있습니다.</div></div>
-      <div class="search-floating"><div class="search-box"><span>⌕</span><input id="global-search" type="search" placeholder="회사, 아파트, 숙소, 지역 검색" autocomplete="off" /><button id="search-clear" aria-label="검색 초기화">×</button></div><div class="quick-import-hint">공고·매물 URL을 붙여넣으면 AI가 조건을 자동 채웁니다.</div></div>
-      <aside class="layer-panel" aria-label="지도 레이어">
-        <div class="panel-kicker">MAP LAYERS</div>
+      <div class="map-fallback" id="map-fallback"><div class="fallback-grid"></div><div class="fallback-message">지도 타일을 불러오지 못했습니다. 목록·이벤트 플랜 기능은 그대로 사용할 수 있습니다.</div></div>
+
+      <div class="search-floating">
+        <div class="search-box"><span>⌕</span><input id="global-search" type="search" placeholder="회사, 아파트, 숙소, 지역 검색" autocomplete="off" /><button id="search-clear" aria-label="검색 초기화">×</button></div>
+        <div class="quick-import-hint">공고·매물 URL을 붙여넣으면 AI가 조건을 자동 채우는 구조입니다.</div>
+      </div>
+
+      <button class="map-option-toggle" id="toggle-map-controls" aria-expanded="false">지도 탐색 옵션 <span>⌄</span></button>
+      <aside class="advanced-map-controls hidden" id="advanced-map-controls" aria-label="고급 지도 레이어">
+        <div class="panel-kicker">ADVANCED EXPLORE</div>
+        <div class="advanced-copy">필요할 때만 지도 정보를 직접 켜고 끌 수 있습니다.</div>
         <button class="layer-chip active" data-layer="jobs"><span class="layer-dot job-dot"></span>직장</button>
         <button class="layer-chip active" data-layer="housing"><span class="layer-dot home-dot"></span>주거</button>
         <button class="layer-chip" data-layer="community"><span class="layer-dot community-dot"></span>생활</button>
-        <button class="layer-chip" data-layer="move"><span class="layer-dot move-dot"></span>이사·창고</button>
-        <button class="layer-chip" data-layer="mobility"><span class="layer-dot mobility-dot"></span>이동</button>
-        <button class="layer-chip" data-layer="finance"><span class="layer-dot finance-dot"></span>금융</button>
+        <button class="layer-chip" data-layer="move"><span class="layer-dot move-dot"></span>실행 파트너</button>
+        <button class="layer-chip" data-layer="mobility"><span class="layer-dot mobility-dot"></span>통근 경로</button>
+        <button class="layer-chip" data-layer="finance"><span class="layer-dot finance-dot"></span>주거금융 범위</button>
       </aside>
 
       <aside class="entity-list-panel" id="entity-list-panel">
-        <div class="panel-head"><div><div class="panel-kicker">DISCOVER</div><strong id="entity-list-title">추천 직장·주거</strong></div><button class="icon-btn" id="collapse-list" aria-label="목록 접기">‹</button></div>
+        <div class="panel-head"><div><div class="panel-kicker">EXPLORE</div><strong id="entity-list-title">회사·집·장소</strong></div><button class="icon-btn" id="collapse-list" aria-label="목록 접기">‹</button></div>
         <div class="smart-filter-row"><button class="smart-filter active" data-filter="all">전체</button><button class="smart-filter" data-filter="verified">검증</button><button class="smart-filter" data-filter="lowcost">비용↓</button><button class="smart-filter" data-filter="reviews">리뷰</button></div>
         <div class="entity-list" id="entity-list"></div>
       </aside>
@@ -52,13 +64,43 @@
         <div class="drawer-body" id="drawer-body"></div>
       </aside>
 
-      <aside class="journey-panel" id="journey-panel"><div class="panel-head"><div><div class="panel-kicker">MY PLAN</div><strong>내 이동 플랜</strong></div><button class="icon-btn" id="collapse-journey" aria-label="플랜 접기">⌄</button></div><div id="journey-content"></div></aside>
       <div class="map-controls"><button id="fit-map" title="전체 보기">◎</button><button id="focus-plan" title="선택한 직장·집 보기">↗</button></div>
     </section>
+
+    <aside class="event-cockpit" id="journey-panel" aria-label="Life Event 플랜">
+      <div class="cockpit-head">
+        <div><div class="panel-kicker">CURRENT LIFE EVENT</div><h1 id="event-current-title">이사를 준비하고 있어요</h1><p id="event-current-subtitle">집을 고른 뒤 필요한 실행을 한 번에 이어갑니다.</p></div>
+        <span class="event-state-badge">LIVE PLAN</span>
+      </div>
+
+      <div class="selection-pair" id="selection-pair"></div>
+
+      <section class="next-action-card" id="next-action-card">
+        <div class="next-action-kicker">NEXT BEST ACTION</div>
+        <h2 id="next-action-title">다음 행동을 계산 중입니다.</h2>
+        <p id="next-action-reason"></p>
+        <button class="primary-btn full-btn" id="next-action-cta">확인하기</button>
+      </section>
+
+      <section class="cockpit-section">
+        <div class="section-heading"><div><span class="panel-kicker">EVENT TIMELINE</span><strong>이 일의 전체 흐름</strong></div><span id="timeline-progress">0 / 0</span></div>
+        <div class="event-timeline" id="event-timeline"></div>
+      </section>
+
+      <section class="cockpit-section execution-section">
+        <div class="section-heading"><div><span class="panel-kicker">ONLY WHEN NEEDED</span><strong>지금 필요한 실행</strong></div></div>
+        <div class="execution-panel" id="execution-panel"></div>
+      </section>
+
+      <section class="trust-strip">
+        <div><span>TRUST LAYER</span><strong>WorkProof · HomeSafe · Promise→Outcome</strong></div>
+        <p>AI는 읽고 설명하며, 계산·근거·금융 준비도는 규칙과 검증 데이터로 처리합니다.</p>
+      </section>
+    </aside>
   </main>
 
   <section class="sheet hidden" id="profile-panel" role="dialog" aria-modal="true" aria-labelledby="profile-title">
-    <div class="sheet-card wide-sheet"><div class="sheet-head"><div><div class="panel-kicker">ONE-TIME PROFILE</div><h2 id="profile-title">한 번 입력하면 다음부터 자동 계산</h2><p>계약서·급여명세서·비자 자료를 연결하면 대부분의 항목을 자동 채울 수 있도록 설계했습니다.</p></div><button class="icon-btn sheet-close" data-close-sheet>×</button></div>
+    <div class="sheet-card wide-sheet"><div class="sheet-head"><div><div class="panel-kicker">ONE-TIME PROFILE</div><h2 id="profile-title">한 번 입력하면 다음 이벤트에도 재사용</h2><p>계약서·급여명세서·비자 자료를 연결하면 대부분의 항목을 자동 채우는 구조입니다.</p></div><button class="icon-btn sheet-close" data-close-sheet>×</button></div>
       <div class="profile-grid">
         <label>비자<select id="profile-visa"><option>E-7</option><option>E-9</option><option>F-2</option><option>F-4</option><option>F-5</option></select></label>
         <label>체류 잔여개월<input id="profile-visa-months" type="number" min="0" /></label>
@@ -75,7 +117,7 @@
   </section>
 
   <section class="sheet hidden" id="import-panel" role="dialog" aria-modal="true" aria-labelledby="import-title">
-    <div class="sheet-card"><div class="sheet-head"><div><div class="panel-kicker">MINIMUM INPUT</div><h2 id="import-title">링크·캡처 하나만 가져오기</h2><p>실서비스에서는 크롤링 허용 범위·제휴 API·사용자 업로드를 Provider Adapter로 연결합니다.</p></div><button class="icon-btn sheet-close" data-close-sheet>×</button></div>
+    <div class="sheet-card"><div class="sheet-head"><div><div class="panel-kicker">MINIMUM INPUT</div><h2 id="import-title">링크·텍스트 하나만 가져오기</h2><p>실서비스에서는 크롤링 허용 범위·제휴 API·사용자 업로드를 Provider Adapter로 연결합니다.</p></div><button class="icon-btn sheet-close" data-close-sheet>×</button></div>
       <form id="quick-import-form"><label class="full-label">공고·매물·차량 URL 또는 텍스트<textarea id="import-input" rows="4" placeholder="예: https://partner.example/jobs/123 또는 '화성 생산직 기숙사 있음'"></textarea></label><div class="import-options"><label><input type="checkbox" id="import-auto-review" checked /> 공개 리뷰·공공 위험신호 자동 연결</label><label><input type="checkbox" id="import-save" checked /> 내 관심목록에 저장</label></div><button class="primary-btn full-btn" type="submit">AI가 구조화하기</button></form>
       <div class="import-result hidden" id="import-result"></div>
     </div>
@@ -84,7 +126,7 @@
   <section class="sheet hidden" id="source-panel" role="dialog" aria-modal="true" aria-labelledby="source-title"><div class="sheet-card"><div class="sheet-head"><div><div class="panel-kicker">DATA PIPELINE</div><h2 id="source-title">데이터 출처</h2><p>현재 화면은 샘플 데이터입니다. 실제 서비스에서는 출처·검증시각·증거수준을 값마다 보존합니다.</p></div><button class="icon-btn sheet-close" data-close-sheet>×</button></div><div id="source-adapters" class="source-adapters"></div></div></section>
 
   <section class="sheet hidden" id="review-modal" role="dialog" aria-modal="true" aria-labelledby="review-title">
-    <div class="sheet-card"><div class="sheet-head"><div><div class="panel-kicker">PROMISE → OUTCOME</div><h2 id="review-title">리뷰는 최대한 탭으로</h2><p id="review-entity-name">장소</p></div><button class="icon-btn sheet-close" data-close-sheet>×</button></div>
+    <div class="sheet-card"><div class="sheet-head"><div><div class="panel-kicker">PROMISE → OUTCOME</div><h2 id="review-title">별점보다 약속과 실제를 남깁니다</h2><p id="review-entity-name">장소</p></div><button class="icon-btn sheet-close" data-close-sheet>×</button></div>
       <form id="review-form"><input type="hidden" id="review-entity-id" />
         <div class="review-field"><span>전체 만족도</span><div class="score-chips" data-score-target="review-rating"></div><input type="hidden" id="review-rating" value="4" /></div>
         <div class="review-field"><span>약속과 실제가 얼마나 같았나요?</span><div class="score-chips" data-score-target="review-promise"></div><input type="hidden" id="review-promise" value="4" /></div>
